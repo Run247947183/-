@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<stdlib.h>
+打印100到200的素数
+int main()
+{
+	int i = 0;
+	int count = 0;
+	for (i = 100; i <= 200; i++)
+	{
+		int j = 0;
+		for (j = 2; j <= i - 1; j++)
+		{
+			if (i%j == 0)
+				break;
+		}
+		//注意：程序走到这一步有两种情况，一种是break的时候跳出循环（即已经被2到i-1中的一个数字整除）另一种是正常执行完所有的循环（即2到i-1都除过），这时j==i
+
+		if (j == i)
+		{
+			count++;
+			printf("%d", i);
+		}
+	}
+	     printf("\ncount=%d", count);
+		 system("pause");
+		 return 0;
+
+}
