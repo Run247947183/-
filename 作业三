@@ -1,0 +1,58 @@
+将数组A中的内容和数组B中的内容进行交换
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+int main(){
+	int i;
+	int a[10];
+	int b[10];
+	int t[10];
+	printf("请输入数组：");
+	for (i = 0; i < 10; i++){
+		scanf(" %d,&a[i]"); {
+			printf("请输入数组b:");
+			for (i = 0; i < 10; i++){
+				scanf(" %d,&a[i]"); {
+					scanf(" %d,&b[i]");
+				}
+				for (i = 0; i < 10; i++); {
+					t[i] = a[i];
+					a[i] = b[i];
+					b[i] = t[i];
+				}
+				for (i = 0; i < 10; i++){
+					printf("%d,a[i]");
+				}
+				printf("\n");
+				for (i = 0; i < 10; i++){
+					printf("%d", b[i]);
+				}
+				printf("\n");
+				return 0;
+			}
+		}
+	}
+
+}
+
+ 计算1/1-1/2+1/3-1/4+1/5 …… + 1/99 - 1/100 的值
+ #include<stdio.h>
+#include<stdlib.h>
+int main(){
+	int num = 0;
+	int count = 0;//统计9的个数
+	for (int n = 1; n <= 100; n++){
+		num = n;//注意这条赋值语句一定要有，不能for循环用num，while循环去除每一位也用num，如果都用num进行循环，则num每次出了while循环后再自增值值都为1，无法进行之后数字的判断
+		while (num > 0){
+			int d = num % 10;
+			if (d == 9){
+				count++;
+			}
+			num /= 10;//去除最后一位
+		}
+	}
+	printf("9的个数为:%d\n", count);
+	system("pause");
+	return 0;
+}
+
