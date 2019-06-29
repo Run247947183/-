@@ -1,0 +1,142 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define max_row 3
+#define max_col 3
+
+void init(char board[max_row][max_col]){
+	for (int row = 0; row < max_row; ++row){
+		for (int col = 0; col < max_col; ++col){
+			board[row][col] = ' ';
+		}
+	}
+	srand(time(0));
+}
+
+void print(char board[max_row][max_col]){
+	system("cls");
+	printf(" ---|---|---\n");
+	  for (int row = 0; row < max_row; ++row){
+		printf("| %c | %c | %c |\n", board[row][0],board[row][1],board[row][2]);
+		printf(" ---|---|---\n");
+	}
+}
+
+void player_move(char board[max_row][max_col]){
+	while (1){
+		printf("请输入坐标(row col):\n");
+		int row = 0;
+		int col = 0;
+		scanf("%d %d", &row, &col);
+		if (row < 0 || row >= max_row || col < 0 || col >= max_col){
+			printf("您的输入有误!\n");
+			continue;
+		}
+			if (board[row][col] != ' '){
+				printf("此处已经有落子!\n");
+				continue;
+			}
+			board[row][col] = 'x';
+			break;	
+		}
+	}
+
+int is_full(char board[max_row][max_col]){
+	//判断棋盘是否满了，方法就是依次检查棋盘的每个位置，看看有没有存在‘ ‘
+	for (int row = 0; row < max_row; ++row){
+		for (int col = 0; col < max_col; ++col){
+			if (board[row][col] == ' '){
+				//找到一个空格，说明棋盘没满
+				return 0;
+			}
+		}
+	}
+	return 1;//棋盘满了
+}
+
+
+//这个函数的返回值是char,因为这里不仅仅是要判断游戏是否结束而且需要返回它的值
+//1.玩家赢则返回'x'
+//2.电脑赢则返回'o'
+//3.平局则返回'='
+//4.未分胜负则返回' '
+char is_win(char board[max_row][max_col]){
+	//此处有三种情况分出胜负1.行一样2.列一样3.对角线一样
+	//行一样
+		for (int row = 0; row < max_row; ++row){
+			if (board[row][0] == board[row][1] && board[row][0] == board[row][2] && board[row][0] != ' '){
+				return board[row][0];
+			}
+		}//列一样
+		for (int col = 0; col < max_col; ++col){
+			if (board[0][col] == board[0][1] && board[0][col] == board[0][2] && board[0][col] != ' '){
+				return board[0][col];
+			}
+		}if (board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != ' '){
+			return board[0][0];
+			//对角线一样
+		}if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != 0){
+			return board[0][2];
+		}//是否和棋
+		if (is_full(board)){
+			return '=';
+		}
+		//胜负未分
+		return ' ';
+	}
+	
+void computer_move(char board[max_row][max_col]){
+	//产生随机数落子的方式
+	while (1){
+		int row = rand() % max_row;
+		int col = rand() % max_col;
+		if (board[row][col] != ' '){
+			continue;
+		}
+		board[row][col] = '0';
+		break;
+	}
+}
+
+
+
+int main(){
+	char result = ' ';
+	
+		system("cls");
+		char chess_board[max_row][max_col];
+		//1.进行初始化
+		init(chess_board);
+		while (1){		
+		//2.打印棋盘
+		print(chess_board);
+		//3.玩家落子
+		player_move(chess_board);
+		//4.判断游戏是否结束
+		result = is_win(chess_board);
+		if (result != ' '){
+			break;
+		}//5.电脑落子
+		computer_move(chess_board);
+		//6判断游戏是否结束
+		if (result != ' '){
+			break;
+		}
+		}  print(chess_board);
+		if (result == 'x'){
+			printf("你赢了!\n");
+		}
+		else if (result == 'o'){
+			printf("你输了!\n");
+		}
+		else{
+			printf("你和电脑打平了!\n");
+		}
+		system("pause");
+	}
+
+
+
+
+
