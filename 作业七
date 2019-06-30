@@ -1,0 +1,170 @@
+#include<stdio.h>
+#include<stdlib.h>
+//递归和非递归分别实现求第n个斐波那契数
+//1.递归实现求第n个斐波那契数
+
+
+int fib(int n){
+	if (n == 1 || n == 2){
+		return 1;
+	}
+	return fib(n - 1)+fib(n - 2);
+}
+
+
+int main(){
+	printf("%d\n", fib(15));
+	system("pause");
+}
+
+
+
+//2.非递归实现斐波那契数
+
+int fib(int n){
+	int a = 1;
+	int b = 1;
+	int c = 0;
+	int i = 0;
+	for (i = 3; i <= n; i++){
+		c = a + b;
+		a = b;
+		b = c;
+	}return c;
+}
+
+int main(){
+	printf("%d\n", fib(15));
+	system("pause");
+}
+
+//编写一个函数实现n^k，使用递归实现
+
+//例如2^3==8,2^3==2^2*2==2*2*2
+
+int fun(int n, int k){
+	if (k == 0){
+		return 1;
+	}return n*fun(n,k-1);
+}
+
+int main(){
+	printf("%d\n", fun(3, 3));
+	system("pause");
+}
+
+
+////写一个递归函数digitsum(n)，输入一个非负整数，返回组成它的数字之和，
+////例如，调用digitsum(1729)，则应该返回1 + 7 + 2 + 9，它的和是19
+
+int digitsum(int n){
+	if (n > 9){
+		return digitsum(n / 10) + n% 10;
+	}
+	return n;
+}
+
+
+
+int main(){
+	printf("%d\n", digitsum(123));
+	system("pause");
+}
+
+
+//编写一个函数 reverse_string(char * string)（递归实现）
+//实现：将参数字符串中的字符反向排列。
+//要求：不能使用C函数库中的字符串操作函数。
+
+int reverse_string(char *str){
+	int len = strlen(str);
+	char tmp = *str;
+	*str = *(str + len - 1);
+	*(str + len - 1) = '\0';
+	if (strlen(str + 1) >= 2){
+		reverse_string(str + 1);
+	}*(str + len - 1) = tmp;
+}
+
+
+
+int main(){
+	char str[] = "abcdefg";
+	reverse_string(str);
+	printf("%s\n",str);
+	system("pause");
+}
+
+//递归和非递归分别实现strlen
+//1.非递归实现strlen
+
+int strlen(char *str){
+	int count = 0;
+	while (*str !='\0'){
+		count++;
+		str++;
+	}return count;
+}
+
+int main(){
+	char str[] = "abg";
+	printf("%d\n", strlen(str));
+	system("pause");
+}
+
+
+//2.递归方式实现strlen
+
+int strlen(char *str){
+	if (*str!='\0'){
+		return  strlen(str + 1)+1;
+	}return 0;
+}
+
+int main(){
+	char str[] = "abcdef";
+	printf("%d\n", strlen(str));
+	system("pause");
+}
+
+//.递归和非递归分别实现求n的阶乘
+//1.非递归实现求n的阶乘
+
+int factorial(int n){
+	int i = 0;
+	int ret = 1;
+	for (i = 1; i <= n; i++){
+		ret = ret*i;
+	}return ret;
+}
+
+int main(){
+	printf("%d\n", factorial(3));
+	system("pause");
+}
+
+//2.递归实现n的阶乘
+
+int factorial(int n){
+	if (n == 1){
+		return 1;
+	}return n*factorial(n - 1);
+}
+
+
+int main(){
+	printf("%d\n", factorial(4));
+	system("pause");
+}
+
+//递归方式实现打印一个整数的每一位,例如123，1 2 3
+int print(int num){
+	if (num > 9){
+		 print(num / 10);
+	}printf("%d ", num % 10);
+}
+int main(){
+	print(123456);
+	printf("\n");
+	system("pause");
+}
