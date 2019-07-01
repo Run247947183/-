@@ -1,0 +1,165 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+#define max_row 9
+#define max_col 9
+#define mine_count 10
+//创建两个二维数组来表示地图
+//a)show_map  表示给玩家展示的内容(数字表示翻开，*表示未翻开）
+//b)mine_map  表示地雷的布局（0表示不是地雷，1表示是地雷）
+
+void init(char show_map[max_row][max_col], char mine_map[max_row][max_col]){
+	srand((unsigned)time(NULL));
+	//1.对show_map进行初始化为全 *
+	for (int row = 0; row < max_row; ++row){
+		for (int col = 0; col < max_col; ++col){
+			show_map[row][col] = '*';
+		}
+	}//2.对于mine_map来说，先初始化全为来0，再随机生成若干个雷
+	for (int row = 0; row < max_row; ++row){
+		for (int col = 0; col < max_col; ++col){
+			mine_map[row][col] = '0';
+		}
+	}//3.随机生成10个雷 
+	int count = mine_count;
+	while (count>0){
+		int row = rand() % max_row;
+		int col = rand() % max_col;
+		if (mine_map[row][col]=='1'){
+			//这个位置已经是雷 了，要重新生成一个雷
+			continue;
+		}
+		mine_map[row][col] = '1';
+		--count;
+	}
+}
+
+void print_map(char map[max_row][max_col]){
+	//1.先打印上面一排 
+	printf("    | ");
+	for (int col = 0; col < max_col; ++col){
+		printf("%d ", col);
+	}
+	//2.再打印一排分割线
+	printf("\n");
+	printf("------------------------\n");
+	for (int row = 0; row < max_row; ++row){
+		printf(" %d  | ", row);
+		for (int col = 0; col < max_col; ++col){
+			printf("%c ", map[row][col]);
+		}
+		printf("\n");
+	}
+}
+
+void get_pos(char show_map[max_row][max_col],
+	         int* row, int* col){
+	while (1){
+		printf("请输入一组坐标：");
+		//scanf 参数是一个指针类型的变量
+	    //此时，row和col本来就是指针，就不用再搞一个取地址
+		scanf("%d %d", row, col);
+		//合法判定
+		if (*row<0 || *row>=max_row || *col < 0 || *col >=max_col){
+			printf("您的输入有误，请重新输入！\n");
+			continue;
+		}
+		if (show_map[*row][*col] != '*'){
+			//当前位置已经被翻开了，就需要重新输入
+			printf("您的输入位置已经翻开，请重新\n");
+			continue;
+		}
+		break;
+	}
+}
+
+//判定当前位置周围有几个雷，并更新对应的地图位置 
+void update_map(char show_map[max_row][max_col],
+	            char mine_map[max_row][max_col],
+				int row,int col){
+	//1.周围八个位置有几个雷
+	int MineCount = 0;
+	//row一定在[0，max_row)
+	//所以row-1一定小于max_row
+	//左上
+	if (row - 1 >= 0 && col - 1 >= 0
+		&& mine_map[row - 1][col - 1] == '1'){
+		++MineCount;
+	}
+	//正上
+	if (row - 1 >= 0 && mine_map[row - 1][col] == '1'){
+		++MineCount;
+	}
+	//右上
+	if (row - 1 >= 0 && col + 1 < max_col && mine_map[row - 1][col + 1] == '1'){
+		++MineCount;
+	}
+	//正左
+	if (col - 1 >= 0 && mine_map[row][col - 1] == '1'){
+		++MineCount;
+	}
+	//正右
+	if (col + 1 < max_col && mine_map[row][col + 1] == '1'){
+		++MineCount;
+	}
+	//左下
+	if (row+1<max_row && col-1>=0 && mine_map[row + 1][col - 1] == '1'){
+		++MineCount;
+	}
+	//正下
+	if (row+1<max_row && mine_map[row + 1][col] == '1'){
+		++MineCount;
+	}
+	//右下
+	if (row+1<max_row && col+1<max_col && mine_map[row + 1][col + 1] == '1'){
+		++MineCount;
+	}
+	//2.把这个雷的数字更新到 show_map 中
+	//字符本质上也是用数字来表示的
+	//ASCII码表
+	show_map[row][col] = MineCount + '0';
+}
+
+void game(){
+	//核心流程
+	//1.创建地图并进行初始化
+	//a)对于 show_map来说，初始化全为 *
+	//b)对于 mine_map来说，要随机产生若干个雷（10个）
+	char show_map[max_row][max_col];
+	char mine_map[max_row][max_col];
+	init(show_map, mine_map);
+	int safe_count = 0;
+	while (1){
+		//下面这俩操作是用来测试用
+		//print_map(mine_map);
+		//printf("===============\n");
+		//2.打印地图
+		print_map(show_map);
+		//3.读取玩家输入的坐标，并检验
+		int row = 0;
+		int col = 0;
+		get_pos(show_map, &row, &col);
+		//4.尝试翻开对应的坐标
+		//a）翻开的坐标是地雷，游戏失败
+		if (mine_map[row][col] == '1'){
+			printf("Game Over!\n");
+			//是地雷，游戏结束
+			break;
+		}
+		//b) 翻开的坐标不是地雷，并且是最后一个不是地雷的格子，游戏获胜
+		++safe_count; 
+		if (safe_count == max_row*max_col - mine_count){
+			printf("Game Win!\n");
+			break;
+		}
+		//c）翻开的坐标不是地雷，更新 show_map,给当前位置显示一个数字（地雷数）
+		update_map(show_map,mine_map,row,col);
+		//5.循环进行 2
+	}
+}
+
+int main(){
+	game();
+	system("pause");
+	return 0;
+}
