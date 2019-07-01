@@ -5,6 +5,17 @@
 #define max_row 3
 #define max_col 3
 
+//操作流程：1.棋盘怎么表示，棋子怎么表示?
+//二维数组表示棋盘'x' 'o'''表示棋子
+//2.游戏的核心流程是什么
+//a)程序启动进行初始化(初始化棋盘)
+//b)打印棋盘
+//C)让玩家落子(输入一个坐标)
+//d)检查游戏是否结束
+//e)电脑落子(随机落子，瞎比下)
+//f)检查游戏是否结束
+
+
 void init(char board[max_row][max_col]){
 	for (int row = 0; row < max_row; ++row){
 		for (int col = 0; col < max_col; ++col){
