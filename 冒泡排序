@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+void swap(int* x, int* y){
+	int tmp = *x;
+	*x = *y;
+	*y = tmp;
+}
+
+void bubble_sort(int *arr, int size){
+	//有两种方式1.找最小的排序  2.找最大的排序
+	//这里用找最小的排序方法
+	//[0,bound)这是已排序区间
+	//[bound,0)待排序区间
+	for (int bound = 0; bound < size; bound++){
+		//此时作用是找到一个比较小的值,并放到合适的位置
+		for (int cur = size - 1; cur>bound; cur--){
+			//此时作用是完成一趟查找中查找最小的过程
+			if (arr[cur-1] > arr[cur]){
+				//此处为升序排序
+				//意思是如果前一个元素比后一个元素大,说明不符合要求,那就交换这俩元素
+				swap(&arr[cur - 1], &arr[cur]);
+			}
+		}
+	}
+}
+
+int main(){
+	int arr[5] = { 4, 5, 6, 9, 8 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+	bubble_sort(arr, size);
+	for (int i = 0; i < size; i++){
+		printf("%d ", arr[i]);
+	}printf("\n");
+	system("pause");
+}
