@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
+#include<time.h>
 #define max_row 9
 #define max_col 9
 #define mine_count 10
@@ -35,6 +36,7 @@ void init(char show_map[max_row][max_col], char mine_map[max_row][max_col]){
 }
 
 void print_map(char map[max_row][max_col]){
+        system("cls");
 	//1.先打印上面一排 
 	printf("    | ");
 	for (int col = 0; col < max_col; ++col){
@@ -142,6 +144,7 @@ void game(){
 		//4.尝试翻开对应的坐标
 		//a）翻开的坐标是地雷，游戏失败
 		if (mine_map[row][col] == '1'){
+		        print_map(mine_map);
 			printf("Game Over!\n");
 			//是地雷，游戏结束
 			break;
