@@ -142,3 +142,30 @@ int main(){
 	return 0;
 }
 
+//题目：编写代码实现，模拟用户登录情景，并且只能登录三次。
+//（只允许输入三次密码，如果密码正确则提示登录 成，如果三次均输入错误，则退出程序
+
+void Users_Login(){
+	int code = 123456;
+	int password = 0;
+	int i = 0;
+	for (i = 0; i < 3; ++i){
+		printf("请输入您的密码:\n");
+		scanf("%d", &password);
+		if (password == code){
+			printf("您已成功登入！\n");
+		}
+		else if (password!=code && i==2){
+			printf("对不起你的密码输入次数达到今日上限！\n");
+		}
+		else {
+			printf("您的输入有误，请重新输入！\n");
+		}
+	}
+}
+
+int main(){
+	Users_Login();
+	system("pause");
+	return 0;
+}
