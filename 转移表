@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int Add(int x, int y){
+	return x + y;
+}
+int Sub(int x, int y){
+	return x - y;
+}
+int Mul(int x, int y){
+	return x * y;
+}
+int Div(int x, int y){
+	return x / y;
+}
+
+int main(){
+	int num1 = 10;
+	int num2 = 20;
+	int choice = 0;
+	printf("请输入您的选择（1 表示+，2 表示-,3 表示*，4 表示/）\n");
+	scanf("%d\n", &choice);
+	int ret = 0;
+	//第一种方法 
+	if (choice == 1){
+		ret = Add(num1, num2);
+	}
+	else if (choice == 2){
+		ret = Sub(num1, num2);
+	}
+	else if (choice == 3){
+		ret = Mul(num1,num2);
+	}
+	else if (choice == 4){
+		ret = Div(num1, num2);
+	}
+	else{
+		printf("您的输入有误！\n");
+	}
+	//第二种写法：使用转移表
+	typedef int(*Func)(int, int);
+	Func arr[] = {
+		Add,//&Add也可以
+		Sub,
+		Mul,
+		Div,
+	};
+	if (choice<1 || choice>4){
+		printf("您的输入有误！\n");
+		return 1;
+	}
+	ret = arr[choice - 1](num1, num2);	//choice-1表示先让用户选择哪种算法，然后后面的（）是函数指针的调用
+	system("pause");
+	return 0;
+}
+
