@@ -1,0 +1,65 @@
+void Swap(int* x, int* y){
+	int tmp = *x;
+	*x = *y;
+	*y = tmp;
+}
+
+typedef int(*Cmp)(int, int);
+//注意Cmp是一种函数指针类型，而不是变量
+//Cmp对应到的函数应该是由两个int 参数，同时返回值也是int类型
+
+void Bubble_Sort(int arr[], int size,Cmp cmp){
+	int bound = 0;
+	//找最小的元素
+	//[0,bound)这是已经排序好的区间
+	//[bound,size)这是未排序的区间
+	//第一重循环的作用是每次找出一个最小的元素并且放在靠前的位置
+	for (bound = 0; bound < size; ++bound){
+		for (int i = size - 1; i>bound; --i){
+			if (cmp(arr[i - 1] , arr[i])){
+				//假设当前是升序排序
+				//如果前一个数大于后一个数说明不符合升序的要求
+				//那就要交换两个数的位置
+				Swap(&arr[i - 1], &arr[i]);
+			}
+		}
+	}
+	printf("%s", arr);
+}
+
+int Less(int x, int y){
+	//这个函数制定升序排序的规则
+	//这里规定x是前一个元素，y是后一个元素
+	//这个函数需要返回一个真假值
+	//需要交换的时候返回真，不需要交换时返回假
+	if (x < y){
+		return 0;
+	}
+	return 1;
+}
+
+int Greater(int x, int y){
+	//通过这个函数来制定降序排序的比较规则
+	//x表示靠前的元素，y表示靠后的元素
+	//返回真表示需要交换，返回假表示不需要交换
+	if (x>y){
+		return 0;
+	}
+	return 1;
+}
+
+//上面两个已经基本将我们的冒泡排序写好，但是如果仅仅能实现降序或者升序其中一种功能
+//所以接下来要使用函数指针（回调函数）的方法，来同时实现两种功能
+
+
+
+int main(){
+	int arr1[4] = { 4, 6, 3, 8 };
+	Bubble_Sort(arr1, 4, Less);//执行升序排序
+	//注意这里的Less和Greater没有带（），这不是调用，只是把函数指针传进去
+	//而这个函数指针对应的那个函数什么时候调用，这由Bubble_Sort说了算，而不是由程序员直接决定
+	int arr2[4] = { 4, 6, 8, 3 };
+	Bubble_Sort(arr2, 4, Greater);//执行降序排序
+	system("pause");
+	return 0;
+}
