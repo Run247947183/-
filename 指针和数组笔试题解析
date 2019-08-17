@@ -1,0 +1,101 @@
+int a[] = {1,2,3,4};
+ printf("%d\n",sizeof(a));  16
+ printf("%d\n",sizeof(a+0));   4
+ 数组+整数就转化成指针，指针加减整数相当于跳过几个元素
+又因为只要是指针，所占字节都为4（前提是在32位系统下）
+在64位系统下占8个字节，一般情况下windows默认（x84）32位系统，切换成 x64 就是64位系统
+ printf("%d\n",sizeof(*a));  4  
+*a相当1所占字节
+ printf("%d\n",sizeof(a+1));   4
+printf("%d\n",sizeof(a[1]));   4
+此处和*a相同
+ printf("%d\n",sizeof(&a));   4
+注意：此处变成了数组指针，只要是指针所占字节都为4个字节
+ printf("%d\n",sizeof(*&a));   16
+&a 是数组指针 ，再进行* 得到了整个数组，所以结果就是16
+printf("%d\n",sizeof(&*a));   4
+*a得到int ,再&得到了 int*
+ printf("%d\n",sizeof(&a+1));   4
+ printf("%d\n",sizeof(&a[0]));  4
+a[0]得到int,再&就得到int *    
+ printf("%d\n",sizeof(&a[0]+1));   4
+
+char arr[] = {'a','b','c','d','e','f'};
+ printf("%d\n", sizeof(arr));  6
+注意：这不是字符串，是字符数组
+ printf("%d\n", sizeof(arr+0));   4
+printf("%d\n", sizeof(*arr));      1
+ printf("%d\n", sizeof(arr[1]));     1
+ printf("%d\n", sizeof(&arr));    4
+printf("%d\n", sizeof(&arr+1));   4
+ printf("%d\n", sizeof(&arr[0]+1));   4
+printf("%d\n",sizeof(arr[0]+1));   4
+注意：arr[0]是‘a',而’a'是char类型，占一个字节，但是因为+1，而1是int 类型
+所以这里发生了整形提升，把小的往大的提升，所以提升成int，也就是4个字节
+
+
+char arr[] = {'a','b','c','d','e','f'};
+printf("%d\n", strlen(arr));   未定义行为，因为此时数组不是字符串
+而strlen函数要遇到\0才停止，所以会发生越界行为
+ printf("%d\n", strlen(arr+0));  未定义行为  
+ printf("%d\n", strlen(*arr));  未定义行为，*arr得到char类型，而strlen需要char*类型
+ printf("%d\n", strlen(arr[1])); 未定义行为
+printf("%d\n", strlen(&arr)); 未定义行为
+printf("%d\n", strlen(&arr+1));未定义行为
+ printf("%d\n", strlen(&arr[0]+1)); 未定义行为
+
+char arr[] = "abcdef";
+ printf("%d\n", sizeof(arr));   7
+注意又\0，也要占一个字节
+printf("%d\n", sizeof(arr+0));   4  因为是指针
+ printf("%d\n", sizeof(*arr));   1
+printf("%d\n",sizeof(*arr+1));    4
+整型提升
+ printf("%d\n", sizeof(arr[1]));  1
+ printf("%d\n", sizeof(&arr));    4
+printf("%d\n", sizeof(&arr+1));   4
+printf("%d\n", sizeof(&arr[0]+1));   4   
+
+char arr[] = "abcdef"; 
+printf("%d\n", strlen(arr));   6
+注意：因为strlen是const*类型，也是指针类型，这里相当于也把arr转化成指针
+ printf("%d\n", strlen(arr+0));   6
+这里和strlen(arr)效果相同
+ printf("%d\n", strlen(*arr));   未定义行为
+因为*arr是一个char,而strlen是char*，所以类型不匹配  
+ printf("%d\n", strlen(arr[1]));  未定义行为
+ printf("%d\n", strlen(&arr));   6  这只是个巧合
+虽然&arr是一个数组指针和strlen的char*类型不匹配，
+但是数组指针的地址和首元素的地址是一样的，
+所以从指定的地址出发往后找\0，就找到了，所以只是碰巧了
+printf("%d\n", strlen(&arr+1));  未定义行为
+&arr+1是一个数组指针跳过整个数组
+ printf("%d\n", strlen(&arr[0]+1));   5
+&arr[0]就是首元素取地址也就是首元素的指针，
+接下来+1就是跳过一个元素，又因为是char*类型所以跳一个字节
+然后就接着往下找\0
+ 
+char *p = "abcdef";
+ printf("%d\n", sizeof(p));   4
+ printf("%d\n", sizeof(p+1));    4
+ printf("%d\n", sizeof(*p));    1
+首元素地址代替整个字符串，但是不知道字符串长度
+此时*p只能知道首元素的字节，而不能知道整个字符串的字节
+ printf("%d\n", sizeof(p[0]));  1
+ printf("%d\n", sizeof(&p));   4
+ printf("%d\n", sizeof(&p+1));   4
+ printf("%d\n", sizeof(&p[0]+1));    4
+此时还是一个char*,只不过因为+1指向b了
+
+char *p = "abcdef"; 
+printf("%d\n", strlen(p));    6
+用局部代替整体，用首元素指针代表整个字符串（常见用法） 
+printf("%d\n", strlen(p+1));   5
+ printf("%d\n", strlen(*p));   未定义行为
+*p是‘a',而把’a‘传给strlen，就不行
+printf("%d\n", strlen(p[0]));  未定义行为
+printf("%d\n", strlen(&p)); 未定义行为 
+二级指针
+printf("%d\n", strlen(&p+1));  未定义行为
+ printf("%d\n", strlen(&p[0]+1));    5
+ 
