@@ -94,12 +94,107 @@ int main(){
 #endif
 //写一个函数，每调用一次这个函数，就会将num的值增加1
 
-int Increase(){
-
+void Increase(){
+	int num = 0;
+	++num;
+	printf("%d\n", num);
 }
 
 int main(){
+	int i = 0;
+	for (; i < 10; ++i){
+		Increase();
+	}
+	system("pause");
+	return 0;
+}
 
+//void inc()
+//{
+//	static int num = 0;
+//	num++;
+//	printf("%d\n", num);
+//}
+//int main()
+//{
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		inc();
+//	}
+//	system("pause");
+//	return 0;
+//}
+
+//接受一个整型值（无符号），按照顺序打印它的每一位。 例如： 输入：1234，输出 1 2 3 4
+
+void print(int num){
+	if (num > 9){
+		print(num / 10);
+	}
+	printf("%d ", num % 10);
+}
+
+
+int main(){
+	int num = 1234;
+	print(num);
+	printf("\n");
+	system("pause");
+	return 0;
+}
+//编写函数不允许创建临时变量，求字符串的长度。
+
+int Len(char arr[]){
+	if (arr[0] == '\0'){
+		return 0;
+	}
+	return 1 + Len(arr + 1);
+}
+
+
+int main(){
+	char arr[] = "abcde";
+	printf("%d\n", Len(arr));
+	system("pause");
+	return 0;
+}
+#endif
+
+//汉诺塔问题：有a、b、c三根棒和n只盘，且这n个盘叠放在a棒上，
+//依次叠放为大盘在下，小盘在上。借助b棒将n只盘从a棒移到c棒上。
+//每次只移一个盘，在移动时保持大盘在下，小盘在上。
+
+
+//将f(n, a, b, c)转化分解为如下三个子问题：
+//①f(n - 1, a, c, b)，即将a棒上面的n-1个盘移到b棒，借助c棒。
+//②move(a, c)，即将在a棒上的一个盘移到c棒。
+//③f(n - 1, b, a, c)，即将b棒上面的n-1个盘移到c棒，借助a棒。
+//以此解决上述3个问题，即完成对原问题的求解。
+//但问题①和③如何解决呢？可以发现子问题①和③与原问题是相同问题，只不过n变成了n-1。
+//按照递归的思想，可以用相同的方法，所以分别对①和③子问题转化转化分解后的最终子问题只有一个盘为止。
+ 
+void Move(char get_one, char put_one){
+	printf("%c-->%c\n", get_one, put_one);
+}
+
+
+void Hanoi(int n, char a, char b, char c){
+	if (n == 1){
+		Move(a, c);
+	}
+	else {
+		Hanoi(n - 1, a, c, b);
+		Move(a, c);
+		Hanoi(n - 1, b, a, c);
+	}
+}
+
+
+int main(){
+	int n = 0;
+	scanf("%d", &n);
+	Hanoi(n, 'A', 'B', 'C');
 	system("pause");
 	return 0;
 }
