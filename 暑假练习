@@ -245,3 +245,174 @@ int main(){
 	system("pause");
 	return 0;
 }
+
+// 5???
+int f(int x){
+	int b = 0;
+	static int c = 3;
+	x = ++c;
+	++b;
+	return x;
+}
+
+int main(){
+	int a = 2, i, k;
+	for (i = 0; i < 2; ++i){
+		k = f(++a);
+	}
+	printf("%d\n", k);
+	system("pause");
+	return 0;
+}
+
+int main(){
+	int m;
+	int n = 0;
+	for (m = 0, n = -1; n = 0; ++m, ++n){
+		++n;
+	}
+	printf("%d\n", n);
+	system("pause");
+	return 0;
+}
+
+int a = 2;
+int test(){
+	int a = 2;
+	a += 1;
+}
+
+int main(){
+	test();
+	printf("%d\n", a);
+	system("pause");
+	return 0;
+}
+
+int main(){
+	int y = 10;
+	int x = 0;
+	x = y++;
+	printf("%d  %d\n", x, y);
+	system("pause");
+	return 0;
+}
+
+int main(){
+	int i = 0;
+	int j = 0;
+	if ((++i > 0) || (++j > 0)){
+		printf("i=%d;j=%d\n", i, j);
+	}
+	system("pause");
+	return 0;
+}
+
+#define MOD(x,y) x%y
+int main(){
+	int a = 13;
+	int b = 94;
+	printf("%d\n", MOD(b, a + 4));
+	system("pause");
+	return 0;
+}
+//有一个数组a，编写函数，求数组中前k个最小的数字
+
+void Swap(int* x, int* y){
+	int tmp = *x;
+	*x = *y;
+	*y = tmp;
+}
+
+void Find_Min_Num(int a[], int k){
+	int bound = 0;
+	for (bound = 0; bound < k; ++bound){
+		for (int cur = k - 1; cur>bound; --cur){
+			if (a[cur - 1] > a[cur]){
+				Swap(&a[cur - 1], &a[cur]);//降序
+			}
+		}
+	}
+}
+
+int main(){
+	int a[] = { 5, 4, 6, 3, 2, 19, 18, 43, 5, 12, 7 };
+	int k = 5;
+	Find_Min_Num(a, k);
+	int ret = a[0];
+	printf("最小数字为：%d\n",ret);
+	system("pause");
+	return 0;
+}
+?????
+int main(){
+	char a[] = "abc";
+	char b[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g' };
+	printf("%d\n", strlen(a));
+	system("pause");
+	return 0;
+}
+//????
+int main(){
+	int s = 0;
+	int n;
+	for (n = 0; n < 4; ++n){
+		switch (n){
+		fedault:
+			s += 4;
+		case 1:
+			s += 1;
+		case 2:
+			s += 2;
+		case 3:
+			s += 3;
+		}
+	}
+	printf("%d\n", s);
+	system("pause");
+	return 0;
+}
+
+
+int main(){
+	char* a = "blue1";
+	char b[] = "bule1";
+	printf("%d", sizeof(b));
+	system("pause");
+	return 0;
+}
+#endif
+//编写函数：求数组中元素出现次数超过数组长度一半的数字。
+//如{1，2，3，2，2，2，5，4，2}数字2为超过数组长度一半的数字
+
+void swap(int* x, int* y){
+	int tmp = *x;
+	*x = *y;
+	*y = tmp;
+}
+
+void bubble_sort(int* arr, int len){
+	int bound = 0;
+	for (bound = 0; bound < len; ++bound){
+		for (int cur = len - 1; cur>bound; --cur){
+			if (arr[cur - 1] > arr[cur]){
+				swap(&arr[cur - 1], &arr[cur]);
+			}
+		}
+	}
+}
+
+
+void Find_Num(int* arr, int len){
+	bubble_sort(arr, len);
+	int mid_num = arr[len / 2];
+	printf("超过数组长度一半的数字为:%d\n",mid_num);
+}
+
+int main(){
+	int arr[] = { 1, 2, 3, 1, 1, 1 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	Find_Num(arr, len);
+	system("pause");
+	return 0;
+}
