@@ -416,3 +416,147 @@ int main(){
 	system("pause");
 	return 0;
 }
+
+
+void Func(char str_arg[2]){
+	int m = sizeof(str_arg);
+	int n = strlen(str_arg);
+	printf("%d\n", m);//4?????????????????
+	printf("%d\n", n);
+}
+
+
+int main(){
+	char str[] = "hello";
+	Func(str);
+	system("pause");
+	return 0;
+}
+
+
+int main(){
+	int a, x;
+	for (a = 0, x = 0;a<=1 && !x++; ++a){
+		++a;
+	}
+	printf("%d %d\n", a, x);
+	system("pause");
+	return 0;
+}
+
+int main(){
+	int a[5] = { 1, 2, 3, 4, 5 };
+	int* p1 = (int*)(&a + 1);
+	int* p2 = (int*)((int)a + 1);
+	int* p3 = (int*)(a + 1);
+	printf("%d, %x, %d\n", p1[-1], p2[0], p3[1]);
+	system("pause");
+	return 0;
+}
+//输入一个整形数组，数组里有正数也有负数，数组中一个或连续的多个整数组成一个子数组
+//求所有子数组的和的最大值，要求时间复杂度为O(n)
+//例如输入的数组为{1，-2，3，10，-4，7，2，-5}，和最大的子数组为{3，10，-4，7，2}
+//因此输出为该子数组的和18
+int Find_Max_Arr(int* str, int len){
+	int max = 0;
+	int tmp = 0;
+	int i = 0;
+	//先进行参数合法性判断
+	if (str == NULL){
+		return 0;
+	} if (len == 0){
+		return 0;
+	}
+	for (i=0;i<len;++i){
+		if (tmp <= 0){
+			tmp = str[i];
+		}
+		else {
+			tmp += str[i];
+		}if (max < tmp){
+			max = tmp;
+		}
+	}
+	return max;
+}
+
+int main(){
+	int str[] = { 3, -1, 13, -8, 9, 4, 5, -2, -10 };
+	int len = sizeof(str) / sizeof(str[0]);
+	int ret = Find_Max_Arr(str, len);
+	printf("%d\n", ret);
+	system("pause");
+	return 0;
+}
+
+//？？？？？？？？？？？？？？？？？？？？？？/
+int main(){
+	char a[] = "abc";
+	char b[] = { 'a', 'b', 'c' };
+	char* c = "abc";
+	char* d = "abc";
+	*a = 'g';
+	//*b = 'g';
+	printf("%d\n", sizeof(a));
+	printf("%d\n", sizeof(b));
+
+	printf("%s\n", a);
+	printf("%s\n", b);
+	printf("%p\n", c);
+	printf("%p\n", d);
+	system("pause");
+	return 0;
+}
+
+//????????????????
+int main(){
+	char* str[3] = { "stra", "strb", "strc" };
+	char* p = str[0];
+	int i = 0;
+	while (i < 3){
+		printf("%s ", p++);
+		i++;
+	}
+	system("pause");
+	return 0;
+}
+
+int main(){
+	const char* b = "abc";
+	char const *c = "abc";
+	char* const a = "abc";
+	//*c = 'g';
+	//*a = 'g';
+	*a = 'g';
+	printf("%s\n", a);
+	system("pause");
+	return 0;
+}
+//
+//char* mystring(){
+//	char buffer[6] = { 0 };
+//	char* s = "Hello World!";
+//	for (int i = 0; i < sizeof(buffer)-1; ++i){
+//		buffer[i] = *(s + i);
+//	}
+//	return buffer;
+//}
+
+int main(){
+	int i = 1;
+	printf("%d,%d\n", sizeof(i++), i);
+	//printf("%s\n", mystring());
+	system("pause");
+	return 0;
+}
+//255??????
+int main(){
+	char a[1000];
+	int i;
+	for (i = 0; i < 1000; ++i){
+		a[i] = (char)(-1 - i);
+	}
+	printf("%d\n", strlen(a));
+	system("pause");
+	return 0;
+
