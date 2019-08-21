@@ -1,0 +1,43 @@
+//模拟实现strstr函数
+//这个函数主要实现的是判断一个字符串是否是另一个字符串的子串
+#endif
+const char* Strstr(const char* str1, const char* str2){
+	//1.首先进行参数的合法性判断
+	if (str1 == NULL || str2 == NULL){
+		return NULL;
+	} if (*str2 == '\0'){
+		return NULL;
+	} 
+	const char* black_ptr = str1;
+	while (*black_ptr != '\0'){
+		const char* red_ptr = black_ptr;
+		const char* sub_ptr = str2;
+		while (*red_ptr != '\0' && *sub_ptr != '\0'
+			&& (*red_ptr == *sub_ptr)){
+			++red_ptr;
+			++sub_ptr;
+		}
+		//上面while不执行的三种情况如下
+		if (*sub_ptr == '\0'){
+			return black_ptr;
+		}
+		else {
+			++black_ptr;
+		}
+	}
+	return NULL;
+}
+
+int main(){
+	char str1[] = "abcdefg";
+	char str2[] = "def";
+	const char* ret = Strstr(str1, str2);
+	if (ret == NULL){
+		printf("没找到！\n");
+	}
+	else {
+		printf("找到了！\n");
+	}
+	system("pause");
+	return 0;
+}
