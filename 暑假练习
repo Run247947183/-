@@ -560,3 +560,44 @@ int main(){
 	system("pause");
 	return 0;
 
+//在字符串中找出第一个只出现一次的字符。如输入“abaccdeff",则输出‘b'
+//要求时间复杂度为O(n)
+
+
+
+
+int Find_FirstOne_Num(char* a, int len){
+	int i = 0;
+	int j = 0;
+	int k = 0;
+	int b[100] = { 0 };//这个数组用来记录每个字符出现的次数
+	for (i = 0; i < len; ++i){
+		k = 0;
+		for (j = 0; j < len; ++j){
+			if (a[i] == a[j]){
+				++k;//因为前面k为0，所以此时遇到相等的先加k，再记录
+				b[i] = k;
+			}
+		}
+	}
+	for (i = 0; i < len; ++i){
+		if (b[i] == 1){
+			return i;
+		}
+	}
+	return len + 1;//此时没有出现单独的字符
+}
+
+int main(){
+	char a[] = "abcacedfdf";
+	int len = strlen(a);
+	int ret=Find_FirstOne_Num(a, len);
+	if (ret > len){
+		printf("这个字符串中没有出现一次的字符！\n");
+	}
+	else {
+		printf("这个字符串中出现一次的字符是：%c\n", a[ret]);
+	}
+	system("pause");
+	return 0;
+}
