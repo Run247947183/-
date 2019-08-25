@@ -809,3 +809,277 @@ int main(){
 }
 
 
+struct student{
+	char name[10];
+	int age;
+	char gender;
+}; std[3], *p = std;
+
+int main(){
+	scanf("%s", &std.);
+	system("pause");
+	return 0;
+}
+
+int main(){
+	int k, j, s;
+	for (k = 2; k < 6; k++, k++){
+		s = 1;
+		for (j = k; j < 6; j++){
+			s += j;
+		}
+	}
+	printf("%d\n", k);
+	system("pause");
+	return 0;
+}
+//8,8?????????????
+int main(){
+	int arr[] = { 6, 7, 8, 9, 10 };
+	int* ptr = arr;
+	*(ptr++) += 123;
+	printf("%d,%d", *ptr,*(++ptr));
+	system("pause");
+	return 0;
+}
+
+//编写一个函数，求一个数字是否是回文数
+//回文数：给定一个数，这个数顺读和逆读都是一样的
+//例如：121，1221
+
+
+
+int Is_Palind(int num){
+	if (num < 0){
+		return 0;
+	}
+	int len = 1;
+	while (num / len >= 10){
+		len *= 10;
+	}
+	while (num>0){
+		//首先获取首尾大小
+		int left = num / len;
+		int right = num % 10;
+		if (left != right){
+			return 0;
+		}
+		else {
+			//此时表示首尾相等，则删除首尾
+			num = (num%len) / 10;
+			len /= 100;
+		}
+	}
+	return 1;
+}
+
+int main(){
+	int num = 0;
+	printf("请输入一个数：\n");
+	scanf("%d", &num);
+	int ret=Is_Palind(num);
+	if (ret == 1){
+		printf("这个数是回文数！\n");
+	}
+	else {
+		printf("这个数不是回文数！\n");
+	}
+	system("pause");
+	return 0;
+}
+
+
+int main(){
+	char a[] = "123456789";
+	char* p = a;
+	int i = 0;
+	while (*p){
+		if (i % 2 == 0){
+			*p = '!';
+		}
+		++i;
+		++p;
+	}
+	printf("%s\n", a);
+	system("pause");
+	return 0;
+}
+
+//Afgd
+int main(){
+	char str[] = "ABCDEFG";
+	char* p1;
+	char* p2;
+	p1 = "abcd";
+	p2 = "efgh";
+	strcpy(str + 1, p2 + 1);
+	strcpy(str + 3, p1 + 3);
+	printf("%s\n", str);
+	system("pause");
+	return 0;
+}
+
+int fun(char* s1, char* s2){
+	int i = 0;
+	while (s1[i] == s2[i] && s2[i] != '\0'){
+		++i;
+	}
+	return (s1[i] == '\0' && s2[i] == '\0');
+}
+
+int main(){
+	char s1[] = "acvd";
+	char s2[] = "acvd";
+	int ret = fun(s1, s2);
+	if (ret == 1){
+		printf("相等！\n");
+	}
+	else {
+		printf("不相等！\n");
+	}
+	system("pause");
+	return 0;
+}
+
+int main(){
+	int j = 4;
+	int i = j;
+	for (; i < 2 * j; ++i){
+		switch (i / j){
+		case 0:
+		case 1:
+			printf("*");
+			break;
+		case 2:
+			printf("#");
+		}
+	}
+	system("pause");
+	return 0;
+}
+
+//10？？？？？？？？？？？？？？/
+int main(){
+	int x = 1;
+	int y = 012;
+	printf("%d", y*x++);//先算++再*
+	system("pause");
+	return 0;
+}
+
+//65535????????????
+int main(){
+	unsigned short sht = 0;
+	sht--;
+	printf("%d", sht);
+	system("pause");
+	return 0;
+}
+
+
+// 模拟实现函数pow(x,y),实现运算x^y(x的y次方），这里x和y都为整数
+int pow(int x,int y){
+	int i = 0;
+	int tmp = 1;
+	for (i = 1; i <= y; ++i){
+		tmp = tmp*x;
+	}
+	return tmp;
+}
+
+int main(){
+	int x = 2;
+	int y = 4;
+	printf("%d\n",pow(x, y));
+	system("pause");
+	return 0;
+}
+
+int main(){
+	char* s = "abcde";
+	s += 2;
+	printf("%s\n", s);
+	system("pause");
+	return 0;
+}
+
+
+int main(){
+	int i;
+	char a[20] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	for (i = 0; i < 10; ++i){
+		a[i] = '0';
+	}
+	printf("%d\n", strlen(a));
+	system("pause");
+	return 0;
+}
+//0??????????
+int main(){
+	int x = 0, y = 0, z = 0;
+	z = (x == 1) && (y = 2);
+	printf("%d\n", y);
+	system("pause");
+	return 0;
+}
+//9????????????????????
+void foo(int b[][3]){
+	++b;
+	b[1][1] = 9;
+}
+
+int main(){
+	int a[3][3] = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+	foo(a);
+	printf("%d\n", a[2][1]);
+	system("pause");
+	return 0;
+}
+
+//10???????????/
+int main(){
+	int i = 10;
+	long long t = sizeof(i++);
+	printf("%d", i);
+	system("pause");
+	return 0;
+}
+#endif
+
+//求一个有序数组中两个元素值相加为k的数字，放回这两个元素的下标。要求时间复杂度位O(n),空间复杂度为O(1)
+
+
+int x, y;
+void Find(int* a, int len, int k){
+	int left = 0;
+	int right = len - 1;
+	int sum = 0;
+	while (left <= right){
+		sum = a[left] + a[right];
+		if (sum < k){
+			left++;
+		}
+		else if (sum>k){
+			right--;
+		}
+		else {
+			x = left;
+			y = right;
+			break;
+		}
+	}
+}
+int main(){
+	int a[] = { 1, 2, 4, 6, 8, 9, 10};
+	int k = 0;
+	int len = sizeof(a) / sizeof(a[0]);
+	printf("请输入一个数：\n");
+	scanf("%d", &k);
+	Find(a, len, k);
+	printf("%d %d\n", x,y);
+	system("pause");
+	return 0;
+}
+
+
+
