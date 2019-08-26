@@ -1081,5 +1081,173 @@ int main(){
 	return 0;
 }
 
+//8.000000????????????????
+int main(){
+	double ret = (double)(10 / 4 * 4);
+	printf("%f\n", ret);
+	system("pause");
+	return 0;
+}
+//9  1   20????????????????????
+int main(){
+	int i, x, y;
+	i = x = y = 0;
+	do{
+		++i;
+		if (i % 2){
+			x += 1;
+			i++;
+		}
+		y += i++;
+	} while (i <= 7);
+	printf("%d %d %d\n", i, x, y);
+	system("pause");
+	return 0;
+}
+//如何判断一个数n是否是2的k次方
+//注意：不需要求出k，只需要判断
+
+void Judge_Is_2(int num){
+	int num2 = num - 1;//因为2的次方的数用二进制表示时，只有一个1，所以将num-1与num 做&，这样就可以消除1
+	if ((num&num2)==0){
+		printf("这个数是2的次方！\n");
+	}
+	else {
+		printf("这个数不是2的次方!\n");
+	}
+}
+
+int main(){
+	int num;
+	printf("请输入一个数：");
+	scanf("%d", &num);
+	Judge_Is_2(num);
+	system("pause");
+	return 0;
+}
+
+int main(){
+	int x = 6;
+	int n = 5;
+	//x += ++n;
+	x += n++;
+	printf("%d\n", x);
+	system("pause");
+	return 0;
+}
+
+//64
+int main(){
+	int x = 4;
+	x += x *= x + x;
+	printf("%d\n", x);
+	system("pause");
+	return 0;
+}
+
+//字符串压缩，输入字符串只包括a-z字母以及结束标志
+//编写函数实现对连续出现的相同字符进行压缩
+//例如：“xxxyyyyz"压缩后字符串为"3x4yz"   "yyyyyyy"压缩后为”7y"
+
+void Compress_Arr(char* arr, int len){
+	int i = 0;
+	int count = 1;
+	for (i = 0; i < len; ++i){
+		if (arr[i] == arr[i + 1]){
+			++count;
+		}
+		else {
+			if (count == 1) {
+				printf("%c\n", arr[i]);
+			}
+			else {
+				printf("%d%c", count, arr[i]);
+			}
+			count = 1;
+		}
+	}
+}
+
+int main(){
+	char arr[] = "xxxyyyyz";
+	int len = strlen(arr);
+	Compress_Arr(arr, len);
+	system("pause");
+	return 0;
+}
+
+int main(){
+	int a = 5;
+	int* p = &a;
+	int* q = &a;
+	//a = (*p)*(*q);
+	q = a;//未定义行为，这里是错误的，C语言不好的地方，如果是在C++中直接就会报错
+	//a = p - q;
+	//p = q;
+	printf("%d\n", p);
+	system("pause");
+	return 0;
+}
+
+//4????????????????????????
+int fun(int a){
+	int b = 0;
+	static int c = 3;
+	a = c++, b++;//?????????????????????/
+	return (a);
+}
+int main(){
+	int a = 2, i, k;
+	for (i = 0; i < 2; i++){
+		k = fun(a++);
+	}
+	printf("%d\n", k);
+	system("pause");
+	return 0;
+}
+#endif
+
+//编写代码完成如下功能：删除字符串首尾的空格，中间的连续空格只留一个，原来字符串的顺序不变
+//如“*****as****adadq*****"（*是空格）变成"as*adadq"
+
+char* Trim(char* arr){
+	//这个函数是用来去除字符串首尾的空格
+	char* p1;
+	char* p2;
+	p1 = arr;
+	p2 = arr + strlen(arr) - 1;
+	while (p1 <= p2 && *p1 == ' '){
+		p1++;
+	}
+	while (p2 >= p1 && *p2 == ' '){
+		p2--;
+	}
+	*(++p2) = '\0';//此处是将首尾空格去除后的p2后面加上\0
+	return p1;
+}
 
 
+char* Delete_Blankspace(char* arr){
+	int i = 0;
+	int count = 0;
+	arr = Trim(arr);
+	char* arr2 = arr;
+	for (i = 0; arr[i]!=0; ++i){
+		if (arr[i] != ' '){
+			*arr2 = arr[i];//将arr[i]的内容保存到arr2中
+			*arr2 = *(arr2++);//将arr2往前移动，以便下次保存内容
+		}if ((arr[i] == ' ') && (arr[i + 1] != ' ')){
+			*arr2 = arr[i];
+			*arr2 = *(arr2++);
+		}
+	}
+	*arr2 = '\0';
+	return arr;
+}
+
+int main(){
+	char arr[] = "     as    adadq     ";
+	printf("%s\n",Delete_Blankspace(arr));
+	system("pause");
+	返回0;
+}
