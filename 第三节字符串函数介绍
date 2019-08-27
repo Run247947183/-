@@ -68,3 +68,53 @@ int main(){
 	system("pause");
 	return 0;
 }
+
+//模拟实现strcmp
+
+int Strcmp(char* p1, char* p2){
+	//首先进行参数合法性判断
+	assert(p1 != NULL && p2 != NULL);//如果里面的条件不满足那么程序直接奔溃
+	while (*p1 != '\0' && *p2 != '\0'){
+		if (*p1 > *p2){
+			return 1;
+		}
+		else if (*p1 < *p2){
+			return -1;
+		}
+		else {
+			++p1;
+			++p2;
+		}
+	}
+	//p1和p2之中至少存在一个数组遇到'\0'
+	if (*p1>*p2){
+		//这种情况说明p2遇到了'\0'，因为\0的asiil值是0，所以肯定是小的那一方
+		return 1;
+	}
+	else if (*p1 < *p2){
+		//这种情况说明p1遇到了'\0'
+		return -1;
+	}
+	else {
+		return 0;
+	}
+}
+
+
+int main(){
+	char str1[] = "hahahaha";
+	char str2[] = "haha";
+	int ret = Strcmp(str1, str2);
+	if (ret == 0){
+		printf("str1==str2\n");
+	}
+	else if (ret < 0){
+		printf("str1<str2\n");
+	}
+	else {
+		printf("str1>str2\n");
+	}
+	system("pause");
+	return 0;
+}
+
