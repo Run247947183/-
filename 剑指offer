@@ -1,1 +1,160 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<assert.h>
+#if 0
+//P38
+int GetSize(int data[]){
+	return sizeof(data);
+}
+//结果 20 ，4，4
 
+int main(){
+	int data1[] = { 1, 2, 3, 4, 5 };
+	int size1 = sizeof(data1);
+	int* data2 = data1;
+	int size2 = sizeof(data2);//data2是int类型指针，在32位系统下,对指针求sizeof结果都为4
+	int size3 = GetSize(data1);//在c/c++中，当数组作为函数的参数进行传递时，数组就会自动退化为同类型的指针。所以size3相当于是求指针的字节
+	printf("%d, %d, %d", size1, size2, size3);
+	system("pause");
+	return 0;
+}
+//P39
+//题目：找出数组中重复的数字
+//例如：数组{2，3，1，0，2，5，3}，重复数字为2和3
+void Find_Repeat_Num(int* arr,int len){
+	int i = 0;
+	int j = 0;
+	int count = 0;
+	printf("重复的数字为：\n");
+	for (i = 0; i < len-1; ++i){
+		for (j = i+1; j < len; ++j){
+			if (arr[i] == arr[j]){
+				printf("%d ", arr[i]);
+			}
+		}
+	}
+	printf("\n");
+}
+
+int main(){
+	int arr[8] = { 1, 4, 5, 6, 6, 4, 2, 9 };
+	Find_Repeat_Num(arr, 8);
+	system("pause");
+	return 0;
+}
+
+//P44
+//题目：二维数组中的查找
+//这个二维数组，每一行都按照从左到右递增，每一列都按照从上到下递增
+//输入一个整数，判断数组中是否含有该整数
+
+int Find_Num(int str[3][3],int num){
+	int a = 2;
+	int b = 0;
+	while (1){
+		if (num > str[a][b] && b < 3){
+			++b;
+		}
+		else if (num < str[a][b] && a > 0){
+			--a;
+		}
+		else if (num == str[a][b]){
+			return 1;
+			break;
+		}
+		else {
+			return 0;
+			break;
+		}
+	}
+}
+
+int main(){
+	int arr[3][3] = { 
+		3,5,8,
+		7,10,13,
+		8,12,20
+	};
+	int n = 0;
+	printf("请输入一个整数：\n");
+	scanf("%d", &n);
+	int ret = Find_Num(arr,n);
+	if (ret == 0){
+		printf("该数组不含有该整数！\n");
+	}
+	else {
+		printf("该数组含有该整数！\n");
+	}
+	system("pause");
+	return 0;
+}
+
+//P49
+int main(){
+	char str1[] = "hello world";
+	char str2[] = "hello world";
+
+	char* str3 = "hello world";
+	char* str4 = "hello world";
+
+	if (str1 == str2){
+		printf("str1 and str2 are same.\n");
+	}
+	else {
+		printf("str1 and str2 are not same.\n");
+		//因为我们会为这两个字符串数组分配两个长度为12字符的空间，并把”hello world"分别复制进去
+		//但是这两个数组的初始地址不同，又因为str1==str2比较的是两个字符串数组的首元素地址
+		//所以这不相同
+	}
+	if (str3 == str4){
+		printf("str3 and str4 are same.\n");
+		//指向同一个地址，所以相同
+	}
+	else {
+		printf("str3 and str4 are not same.\n");
+	}
+	system("pause");
+	return 0;
+}
+#endif
+
+//P51
+//题目：实现一个函数，把字符串中的空格替换成%20
+char* ReplaceBlank(char* arr,int len){
+	//参数合法性判断
+	assert(arr != NULL);
+	int original_len = 0;
+	int num_of_blank = 0;
+	int i = 0;
+	while (arr[i] != '\0'){
+		++original_len;
+		if (arr[i] == ' '){
+			++num_of_blank;
+		}
+		++i;
+	}
+	int new_len = original_len + num_of_blank * 2;//新的长度是原有长度加上空格数乘2，因为把空格替换成%20比原来的空格多了2
+	int len1 = original_len;
+	int len2 = new_len;
+	while (len1 > 0 && len2 > len1){
+		if (arr[len1] == ' '){
+			arr[len2--] = '0';//替换之后还要向前走一格，此处表示先替换后往前
+			arr[len2--] = '2';
+			arr[len2--] = '%';
+		}
+		else {
+			arr[len2--] = arr[len1];
+		}
+		--len1;
+	}
+	return arr;
+}
+
+int main(){
+	char str[20] = "we are happy";
+	printf("%s\n", ReplaceBlank(str,20));
+	system("pause");
+	return 0;
+}
