@@ -1,0 +1,122 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+#if 0
+//经典常考笔试题
+//题1：
+//错误之处：1.没有释放内存（free(p))，内存泄漏
+//          2.malloc之后需要判定 NULL
+//          3.释放完内存之后，需要设为 NULL
+//          4.形参是实参的拷贝，str没有发生变化还是空指针(函数申请到的内存，并没有正确的被函数外部获取到)，正确写法应该是如下所示：
+//          形参是实参的拷贝，直接修改形参不会影响到实参，应该参数传指针
+//void Getmemory(char** p){
+//	*p = (char*)malloc(100);
+//}
+//
+//void Test(void){
+//	char* str = NULL;
+//	Getmemory(&str);
+//	strcpy(str, "hello world");
+//	printf(str);
+//}
+
+//或者是以下第二种写法
+//#define GETCHAR char* 
+//
+//void Getmemory(GETCHAR* p){
+//	*p = (GETCHAR)malloc(100);
+//}
+//
+//void Test(void){
+//	GETCHAR str = NULL;
+//	Getmemory(&str);
+//	strcpy(str, "hello world");
+//	printf(str);
+//}
+
+
+void Getmemory(char* p){
+	p = (char*)malloc(100);
+}
+
+void Test(void){
+	char* str = NULL;
+	Getmemory(str);
+	strcpy(str, "hello world");
+	printf(str);//因为str是字符串char* 类型，所以此种打印方法可行
+}
+
+//题2：
+//错误之处：GetMemory函数结束后，里面的内存都会被释放，所以p的内容也会消失
+char* GetMemory(void){
+	char p[] = "hello world";
+	return p;
+}
+
+void Test(void){
+	char* str = NULL;
+	str = GetMemory();
+	printf(str);
+}
+
+//题3：
+//错误之处：1.没有释放内存
+void GetMemory(char **p, int num){
+	*p = (char*)malloc(num);
+}
+
+void Test(void){
+	char* str = NULL;
+	GetMemory(&str, 100);
+	strcpy(str, "hello");
+	printf(str);
+}
+
+//题4：
+//错误之处：free(ste)释放完内存之后，没有手动将NULL赋值给str
+void Test(void){
+	char* str = (char*)malloc(100);
+	strcpy(str, "hello");
+	free(str);
+	//str=NULL
+	if (str != NULL){
+		strcpy(str,"world");
+		printf(str);
+	}
+}
+
+
+//?????????
+void GetMemory(char** p, int num){
+	*p = (char*)malloc(num);
+	strcpy(*p, "hello");
+	printf(*p);
+	free(p);
+	p = NULL;
+}
+
+void Test(void){
+	char* str = NULL;
+	GetMemory(&str, 100);
+}
+#endif
+
+char* GetMemory(void){
+	char p[] = "hello world";
+	return p;
+}
+
+void Test(void){
+	char* str = NULL;
+	str = GetMemory();
+	printf(str);
+}
+
+int main(){
+	Test();
+	system("pause");
+	return 0;
+}
+
