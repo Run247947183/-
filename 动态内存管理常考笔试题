@@ -50,6 +50,8 @@ void Test(void){
 
 //题2：
 //错误之处：GetMemory函数结束后，里面的内存都会被释放，所以p的内容也会消失
+//          这个内存在函数结束的时候就释放了，所以在函数外部使用的内存已经是一个被释放了的内存空间
+//          读出来的是一个未定义行为，内存访问越界
 char* GetMemory(void){
 	char p[] = "hello world";
 	return p;
@@ -62,7 +64,7 @@ void Test(void){
 }
 
 //题3：
-//错误之处：1.没有释放内存
+//错误之处：没有释放内存
 void GetMemory(char **p, int num){
 	*p = (char*)malloc(num);
 }
@@ -88,31 +90,8 @@ void Test(void){
 }
 
 
-//?????????
-void GetMemory(char** p, int num){
-	*p = (char*)malloc(num);
-	strcpy(*p, "hello");
-	printf(*p);
-	free(p);
-	p = NULL;
-}
 
-void Test(void){
-	char* str = NULL;
-	GetMemory(&str, 100);
-}
 #endif
-
-char* GetMemory(void){
-	char p[] = "hello world";
-	return p;
-}
-
-void Test(void){
-	char* str = NULL;
-	str = GetMemory();
-	printf(str);
-}
 
 int main(){
 	Test();
