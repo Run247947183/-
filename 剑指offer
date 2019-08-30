@@ -158,3 +158,170 @@ int main(){
 	system("pause");
 	return 0;
 }
+//P76
+//题目：求斐波那契数
+
+//1.递归做法：效率低下，如果数较大，那么重复出现的数字太多，重复计算拖慢了计算速度
+int Fib(unsigned int n){
+	if (n <= 0){
+		return 0;
+	}
+	if (n == 1){
+		return 1;
+	}
+	return Fib(n - 1) + Fib(n - 2);
+}
+
+//2.高效做法
+//
+//int Fib(unsigned n){
+//	if (n <= 0){
+//		return 0;
+//	}
+//	if (n == 1){
+//		return 1;
+//	}
+//	int Fib_one = 0;
+//	int Fib_two = 1;
+//	int Fib_count = 0;
+//	for (int i = 0; i <= n; ++i){
+//		Fib_count = Fib_one + Fib_two;
+//		Fib_one = Fib_two;
+//		Fib_two = Fib_count;
+//	}
+//	return Fib_count;
+//}
+//
+int main(){
+	int n = 10;
+	int ret = Fib(n);
+	printf("%d", ret);
+	system("pause");
+	return 0;
+}
+
+#endif
+#if 0
+
+//P100
+//题目：计算一个整数的二进制中1的个数
+
+//解法1：此方法有明显缺陷，当输入的值为负数时，程序崩溃
+//因为负数的最高位是1，如果一直做右移运算，那么最终这个数字就会陷入死循环
+int Find_One(int n){
+	int count = 0;
+	while (n){
+		if (n & 1){
+			count++;
+		}
+		n = n >> 1;
+	}
+	return count;
+}
+
+int main(){
+	int n = -1;
+	int ret=Find_One(n);
+	printf("%d\n", ret);
+	system("pause");
+	return 0;
+}
+//解法2：
+
+int Find_One(int n){
+	int count = 0;
+	unsigned int flag = 1;
+	while (flag){
+		if (n & flag){
+			++count;
+		}
+		flag = flag << 1;
+	}
+	return count;
+}
+
+int main(){
+	int n = 9;
+	printf("%d\n", Find_One(n));
+	system("pause");
+	return 0;
+}
+
+//解法3（推荐）:
+
+int Find_One(int n){
+	int count = 0;
+	while (n){
+		++count;
+		n = n & (n - 1);
+	}
+	return count;
+}
+
+int main(){
+	int n = 9;
+	printf("%d\n", Find_One(n));
+	system("pause");
+	return 0;
+}
+
+//P114
+//题目：打印从1到最大的n位数
+//例如：输入3，则打印出1,2,3一直到最大的3位数999
+//这道题有一个重大陷阱，没有告诉我们n的范围，也就是说万一n的取值很大时，可能用int和long long都会溢出
+void PrintBiggest_n_Digit(int n){
+	if (n <= 0){
+		return;
+	}
+	//先找出最大的n位数
+	int number = 1;
+	int i = 0;
+	while (i++ < n){
+		number *= 10;
+	}
+	//开始打印每个数
+	for (i = 1; i < number; ++i){
+		printf("%d\n", i);
+	}
+}
+int main(){
+	PrintBiggest_n_Digit(0);
+	system("pause");
+	return 0;
+}
+
+void ReorderOddEven(int* arr, unsigned int length){
+	//先进行参数合法性判断
+	if (arr == NULL || length == 0){
+		return;
+	}
+	int* Begin = arr;
+	int* End = arr + length - 1;
+	while (Begin < End){
+		while (!fun(*Begin){
+			Begin++;
+		}
+		while ((fun(*End)){
+			End--;
+		}
+		if (Begin < End){
+			int temp = *Begin;
+			*Begin = *End;
+			*End = temp;
+		}
+	}
+}
+
+int main(){
+	int arr[] = { 2, 4, 3, 7, 9 };
+	int length = sizeof(arr) / sizeof(arr[0]);
+	ReorderOddEven(arr, length);
+	for (int i = 0; i < length; ++i){
+		printf("%d ", arr[i]);
+	
+	system("pause");
+	return 0;
+}
+#endif
+
+
