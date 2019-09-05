@@ -35,8 +35,7 @@ int main(){
 	system("pause");
 }
 
-//P243
-//题目：第一个只出现一次的字符    
+/
 #define TableSize 256
 
 char FirstNotRepeatingChar(char* string){
@@ -192,23 +191,3 @@ int GetLastNum(const int* str, int length, int left, int right, int num){
 	return GetLastNum(str, length, left, right, num);
 }
 
-int GetNum(int* str, int length, int num){
-	int number = 0;
-	if (str != NULL && length > 0){
-		int first = GetFirstNum(str, length, 0, length-1, num);
-		int last = GetLastNum(str, length, 0, length - 1, num);
-		if (last > -1 && first > -1){
-			//大于-1是再证明num的存在，这两个只要一个大于-1，那么另一个也一定大于-1
-			number = last - first + 1;
-		}
-	}
-	return number;
-}
-
-int main(){
-	int arr[] = { 1, 2, 3, 3, 3, 3, 4, 5 };
-	int len = sizeof(arr) / sizeof(arr[0]);
-	printf("%d\n", GetNum(arr,len,3));
-	system("pause");
-	return 0;
-}
