@@ -166,28 +166,4 @@ int GetFirstNum(const int* str, int length, int left, int right, int num){
 	return GetFirstNum(str, length, left, right, num);//次情况说明没有找到第一个num，递归接着查找第一个num
 }
 
-int GetLastNum(const int* str, int length, int left, int right, int num){
-	if (left > right){
-		return -1;
-	}
-	int mid_length = (left + right) >> 1;
-	int mid_str = str[mid_length];
-	if (mid_str == num){
-		if ((mid_length < length - 1 && str[mid_length + 1] != num )|| mid_length == length - 1){
-			//如果下标等于该数组的最后一个下表，那么它一定为最后一个num
-			//如果下标不为该数组的最后一个下标，并且它的后一个元素不为num，那么它也一定为最后一个num
-			return mid_length;
-		}
-		else{
-			left = mid_length + 1;
-		}
-	}
-	else if (mid_str < num){
-		left = mid_length + 1;
-	}
-	else {
-		right = mid_length - 1;
-	}
-	return GetLastNum(str, length, left, right, num);
-}
 
