@@ -137,33 +137,4 @@ int FindNumFrequency(int* str, int length,int num){
 
 #endif
 
-//解法二：
-
-int GetFirstNum(const int* str, int length, int left, int right, int num){
-	if (left > right){
-		return -1;
-	}
-	int mid_length = (left + right) >> 1;
-	int mid_str = str[mid_length];
-	if (mid_str == num){
-		//这种情况是中间元素为num，然后再判断这个数是不是第一个num
-		if ((mid_length > 0 && str[mid_length - 1] != num )|| mid_length == 0){
-			//如果为下标0，那么它一定是第一个num
-			//如果下标不为0，并且前一个数也不为num，又因为是按顺序排列，那么它一定为第一个num
-			return mid_length;
-		}
-		else{
-			//既然它不为第一个num，那么第一个num一定在它的左边
-			right = mid_length - 1;
-		}
-	}
-	else if (mid_str > num){
-		right = mid_length - 1;
-	}
-	else {
-		left = mid_length + 1;
-	}
-	return GetFirstNum(str, length, left, right, num);//次情况说明没有找到第一个num，递归接着查找第一个num
-}
-
 
