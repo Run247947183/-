@@ -112,29 +112,4 @@ int main(){
 
 //解法一(时间复杂度为O(n)):二分查找
 
-int FindNumFrequency(int* str, int length,int num){
-	int count = 0;
-	int left = 0;
-	int right = length - 1;
-	int mid = 0;
-	if (str == NULL || length <= 0){
-		return 0;
-	}
-	while (left <= right){
-		mid = (left + right) >> 1;
-		if (str[mid] == num){
-			++count;
-			++mid;
-		}
-		else if (str[mid]>num) {
-			right = mid - 1;
-		}
-		else{
-			left = mid + 1;
-		}
-	}
-}
-
-#endif
-
 
