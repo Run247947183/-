@@ -1,0 +1,86 @@
+public class Class1{
+    public static void main(String[] args) {
+        //判断一个数是奇数还是偶数
+        // int num = 3;
+        // if (num % 2 == 0){
+        //     System.out.println("这个数是偶数！");
+        // } else {
+        //     System.out.println("这个数是奇数！");
+        // }
+
+
+        //判断一个数是正数还是负数
+        // double num = 100.2;
+        // if (num > 0){
+        //     System.out.println("正数！");
+        // } else if (num < 0) {
+        //     System.out.println("负数！");
+        // } else {
+        //     System.out.println("这个数是0！");
+        // }
+
+
+        //打印1到10的数字
+        // int i = 1;
+        // while (i < 11){
+        //     System.out.println(i);
+        //     i++;
+        // }
+
+
+        //计算1到100的和
+        //     int num = 1;
+        //     int sum = 0;
+        //     while (num < 101){
+        //         sum += num;
+        //         num++;
+        //     }
+        //     System.out.println(sum);
+
+        //计算5的阶乘
+        // int n = 5;
+        // int i = 1;
+        // int result = 1;
+        // while (i <= n){
+        //     result *=i;
+        //     i++; 
+        // }
+        // System.out.println(result);
+
+
+        //计算1！+2！+3！+4！+5！
+        // int n = 4;
+        // int i = 1;
+        // int result = 1;
+        // int sum = 0;
+        // while (i <= n){
+        //     result *= i;
+        //     sum += result;
+        //     i++;
+        // }
+        // System.out.println(sum);
+
+
+        //找到100到200中第一个3的倍数
+        // int i = 100;
+        // while (i <= 200){
+        //     if (i % 3 == 0){
+        //         System.out.println(i);
+        //         break;
+        //     }
+        //     i++;
+        // }
+
+
+        //找到100到200中所有3的倍数
+        int i = 100;
+        while (i <= 200){
+            if (i % 3 != 0){
+                i++;
+                continue;
+            }
+            System.out.println("3的倍数为： "+i);
+            i++;
+        }
+    }
+}
