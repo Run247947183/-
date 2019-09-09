@@ -82,34 +82,5 @@ int FindReverseOrder(int* arr,int length){
 	for (j = 0; j < length; ++j){
 		int temp = arr[j];
 		for (i = j+1; i < length ; ++i){
-			if (temp > arr[i]){
-				++count;
-			}
-		}
-	}
-	return count;
-}
-
-int main(){
-	int str[] = { 7, 5, 6, 4 };
-	int len = sizeof(str) / sizeof(str[0]);
-	int ret = FindReverseOrder(str, len);
-	if (ret == 0){
-		printf("对不起，您输入的数组有误！\n");
-	}
-	else {
-		printf("该数组有逆序对：%d\n",ret);
-	}
-	system("pause");
-	return 0;
-}
-
-//解法二：
-
-//P264
-//题目：在排序数组中查找数字
-//统计一个数字在数组出现的次数，例如数组{1，2，3，3，3，3，4，5}中3的出现了4次，输出3
-
-//解法一(时间复杂度为O(n)):二分查找
-
+			if (temp
 
