@@ -66,21 +66,4 @@ int main(){
 	system("pause");
 	return 0;
 }
-//P249
-//题目:数组中的逆序对
-//数组中的两个数字，如果前面一个数大于后面的数字，那么这两个数字组成了逆序对
-//例如数组{7，5，6，4}中，一共有五个逆序对
-
-//解法一(时间复杂度为O(n的平方))：
-int FindReverseOrder(int* arr,int length){
-	int i = 0;
-	int j = 0;
-	int count = 0;
-	if (arr == NULL || length <= 0){
-		return 0;
-	}
-	for (j = 0; j < length; ++j){
-		int temp = arr[j];
-		for (i = j+1; i < length ; ++i){
-			if (temp
 
