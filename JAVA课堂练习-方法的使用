@@ -1,0 +1,82 @@
+public class Class2{
+    public static void main(String[] args) {
+    //     int a = 4;
+    //     int b = 8;
+    //     int ret = add(a,b);
+    //     System.out.println("ret = " + ret);
+    // }
+    // public static int add(int a,int b){
+    //     return a + b;
+
+        
+        //典型的形参和实参的问题
+        // 错误写法如下：
+    //     int a = 10;
+    //     int b = 20;
+    //     swap(a,b);
+    //     System.out.println(" a = " + a + " b = " + b);
+    // }
+    // public static void swap(int x,int y){
+    //     int temp = x;
+    //     x = y;
+    //     y = temp;
+    // }
+
+    // 正确写法如下：
+    // int[] arr = { 10, 20};
+    // swap(arr);
+    // System.out.println(" a = " + arr[0] + " b = " + arr[1]);
+    // }
+    // public static void swap(int[] arr){
+    //     int temp = arr[0];
+    //     arr[0] = arr[1];
+    //     arr[1] = temp;
+
+    //递归求N的阶乘
+    // int n = 5;
+    // int ret = factor(n);
+    // System.out.println(ret);
+    // }
+    // public static int factor(int N){
+    //     if (N == 1){
+    //         return 1;
+    //     }
+    //     return N * factor(N - 1);
+    
+    //递归练习
+    //按顺序打印一个数字的每一位（例如1234打印出1 2 3 4）
+    // int num = 1234;
+    // printAllBit(num);
+    // }
+    // public static void printAllBit(int n){
+    //     if (n > 9){
+    //         printAllBit(n / 10);
+    //     }
+    //     System.out.println(n % 10);
+
+    //递归求1+2+3......+10
+    // int num = 10;
+    // int ret = add(num);
+    // System.out.println(ret);
+    // }
+    // public static int add(int n){
+    //     if (n == 1){
+    //         return n;
+    //     }
+    //     return n + add(n - 1);
+
+    //递归方法，输入一个非负整数，返回组成它的数字之和
+    //例如输入1729，则返回1+7+2+9，和为19
+    // int a = 1729;
+    // int ret = add(a);
+    // System.out.println(ret);
+    // }
+    // public static int add(int num){
+    //     if (num < 10){
+    //         return num;
+    //     }
+    //     return num % 10 + add(num / 10);
+
+    //
+    }
+}
