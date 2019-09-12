@@ -1,0 +1,150 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Task2{
+    public static void main(String[] args) {
+        //编写程序数一下 1到 100 的所有整数中出现多少个数字9
+        // int n = 100;
+        // int count = 0;
+        // for (int i = 1; i < 101; i++){
+        //     if ((i % 10) == 9){
+        //         count++;
+        //     }
+        // }
+        // System.out.println("1到100中出现9的数字有：" + count);
+
+        //求出0～999之间的所有“水仙花数”并输出
+        //(“水仙花数”是指一个三位数，其各位数字的立方和确好等于该数本身)
+        //如；153＝1＋5＋3?，则153是一个“水仙花数” 
+        /*
+        int num = 153;
+        IsNarcissisticNum(num);
+    }
+    public static void IsNarcissisticNum(int num){
+        int bit = 0;
+        int decade = 0;
+        int hundreds = 0;
+        int sum = 0;
+        for (int i = 0; i < 1000; i++){
+            bit = i % 10;
+            decade = (i / 10) % 10;
+            hundreds = (i / 100) % 10;
+            sum = bit * bit * bit + decade * decade * decade + hundreds * hundreds * hundreds;
+            if (i == sum){
+                System.out.println(i + " 是水仙花数！");       
+            }
+        }
+        */
+
+        //编写代码模拟三次密码输入的场景
+        //最多能输入三次密码，密码正确，提示“登录成功”
+        //密码错误，可以重新输入，最多输入三次。三次均错，则提示退出程序 
+        /*
+        menu();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入您的选择：");
+        int choice = scanner.nextInt();
+        int password = 4567;
+        for (int i = 0; i < 4; i++) {
+            if (i == 3){
+                System.out.println("对不起，您今日的登入失败次数以达到上限！");
+                break;
+            } else if (choice == 0){
+                System.out.println("再见！");
+                break;
+            } else if (choice == 1){
+                System.out.println("请输入您的密码：");   
+                int str = scanner.nextInt();
+                if (str == password){
+                    System.out.println("登入成功！");
+                    break;
+                } else {
+                    System.out.println("登入失败，请重新输入！");
+                    continue;
+                }
+            } else {
+                System.out.println("您的选择有误！");
+                break;
+            }
+        }
+        scanner.close();
+    }
+    public static void menu(){
+        System.out.println("######################");
+        System.out.println("########1.登入########");
+        System.out.println("########0.退出########");
+        System.out.println("######################");
+        */
+
+        //完成猜数字游戏
+        /*
+        System.out.println("开始猜数字游戏！");
+        Random in = new Random();
+        int random = in.nextInt(100) + 1;
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("请输入一个1-100间的数字：");
+            int toGuess = scanner.nextInt();           
+            if (toGuess == random) {
+                System.out.println("猜对了！");
+                break;
+            } else if (toGuess > random) {
+                System.out.println("猜大了！");
+                continue;
+            } else if (toGuess < random) {
+                System.out.println("猜小了！");
+                continue;
+            }
+        }
+        */
+
+        //输出一个整数的每一位
+        /*
+        int n = 123456;
+        printAllbit(n);
+    }
+    public static void printAllbit(int num) {
+        if (num > 9) {
+            printAllbit(num / 10);
+        }
+        System.out.println(num % 10);
+        */
+
+        /*
+        //写一个函数返回参数二进制中 1 的个数 
+        //比如： 15 0000 1111 4 个 1 
+        int n = 15;
+        int ret = countOne(n);
+        System.out.println("1的个数为：" + ret);
+    }
+    public static int countOne(int num){
+        int count = 0;
+        while (true) {
+            if (num != 0) {
+                count++;
+                num = num >> 1;
+            } else {
+                return count;
+            }
+        }
+        */
+
+        //获取一个数二进制序列中所有的偶数位和奇数位,分别输出二进制序列
+        int num = 10;
+        int i = 0;
+        int ret1 = 0;
+        int ret2 = 0;
+        //先输出偶数序列
+        System.out.println("偶数序列为：");
+        for (i = 31; i >= 1; i -= 2) {
+            ret1 = (num >> i) & 1;
+            System.out.print(" " + ret1);
+        }
+        System.out.println();
+        System.out.println("奇数序列为：");
+        for (i = 30; i >= 0; i -= 2) {
+            ret2 = (num >> i) & 1;
+            System.out.print(" " + ret2);
+        }
+    }    
+}
