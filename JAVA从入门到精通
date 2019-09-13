@@ -1,0 +1,121 @@
+import java.util.Scanner;
+public class Book1{
+    public static void main(String[] args) {
+        // int a = 1;
+        // int b = 2;
+        // int c = 0;
+        // c = a % b;
+        // int a = 4;
+        // int b = 5;
+        // System.out.println("4 > 5 是否成立："+(a > b));
+        // System.out.println("5 > 4 是否成立："+(b > a));
+        
+        /*
+        //P55
+        //不用其他变量实现两个变量互换
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入变量A的值：");
+        int A = scanner.nextInt();
+        System.out.println("请输入变量B的值：");
+        int B = scanner.nextInt();
+        System.out.println("没有交换之前： A = " + A + " B = " + B);
+        A = A ^ B;
+        B = B ^ A;
+        A = A ^ B;
+        System.out.println("交换之后： A = " + A + " B = " + B);
+        */
+
+
+        /*
+        //判断数字的奇偶性
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入一个整数：");
+        int num = scanner.nextInt();
+        String check = (num % 2 == 0) ? "这个数是：偶数" : "这个数是：奇数";             
+        System.out.println(check);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入一个整数：");
+        int num = scanner.nextInt();
+        if (num % 2 == 0) {
+            System.out.println("这个数是：偶数");
+        } else {
+            System.out.println("这个数是：奇数");
+        }
+
+
+        //P57
+        byte a = 127;
+        int b = 150;
+        float c = 452.12f;
+        char d = 10;
+        double e = 45.46546;
+        System.out.println("127与452.12相加的和是：" + (a + c));
+        System.out.println("127与45.46546相加的和是：" + (a + e));
+
+
+        //P58
+        //类型转换实战
+        int intnum = 4;
+        float floatnum = 9.5F;
+        floatnum /= intnum;
+        System.out.println(floatnum);
+
+        double num1 = 4.88;
+        double num2 = 78.83;
+        int num3 = (int)num1 + (int)num2;
+        System.out.println(num3);
+
+        char charstr = 'T';//T的ascii码值为84
+        int intstr = (int)charstr;
+        System.out.println(intstr);
+
+        int numx = 34;
+        double numy = (double)numx / 3;
+        System.out.println(numy);
+        
+        String a = "abc";
+        String b = "abc";
+        if (a.equals(b)) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+
+        //P71
+        //验证登录信息的合法性
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 1; i < 5; i++) {
+            if (i == 4) {
+                System.out.println("您今日错误次数已达到上限！");
+                break;
+            }
+            System.out.println("请输入您的用户名：");
+            String name = scanner.nextLine();
+            System.out.println("请输入您的密码：");
+            String password = scanner.nextLine();
+            if (!name.equals("王超")) {
+                System.out.println("您输入的用户名有误,请重新输入");
+                continue;
+            } else if (!password.equals("666")) {
+                System.out.println("您输入的密码有误，请重新输入");
+                continue;
+            } else {
+                System.out.println("登录成功！");
+                break;
+            }
+        }
+
+         int[] list = { 1, 2, 3, 4, 5};
+         for (int i : list) {
+             if (i == 2 || i == 3) {
+                 i *= 100;
+             }
+         } 
+         for (int i : list) {
+             System.out.println(i);
+         }
+        */
+
+    }
+}
