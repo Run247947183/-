@@ -58,12 +58,4 @@ char FirstNotRepeatingChar(char* string){
 		pHashKey++;
 	}
 	return '\0';
-}
-
-int main(){
-	char string[] = "abaccdeff";
-	printf("%c\n", FirstNotRepeatingChar(string));
-	system("pause");
-	return 0;
-}
 
