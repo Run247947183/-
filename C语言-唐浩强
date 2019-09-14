@@ -632,3 +632,95 @@ int main(){
 	system("pause");
 	return 0;
 }
+
+
+//P216
+//写一个函数，使给定的一个3x3的二维整型数组转置，即行列互换
+#define M 3
+#define N 3
+void exchange(int str[N][M]) {
+	int i = 0;
+	int j = 0;
+	int str2[N][M];
+	for (i = 0; i < N; ++i) {
+		for (j = 0; j < M; ++j) {
+			str2[j][i] = str[i][j];
+		}
+	}
+	for (i = 0; i < N; ++i) {
+		for (j = 0; j < M; ++j) {
+			printf("%d ", str2[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+int main() {
+	int arr[N][M];
+	printf("请输入一个3X3的二维数组：");
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 3; ++j) {
+			scanf("%d", &arr[i][j]);
+		}
+	}
+	exchange(arr);
+	system("pause");
+	return 0;
+}
+
+//P216
+//写一个函数，使输入的一个字符串按反序存放，在主函数中输入和输出字符串
+
+void reverseOver(char* str,int len) {
+	char* end = &str[len - 1];
+	char* start = &str[0];
+	char temp = 0;
+	for (int i = 0; i < len / 2; ++i) {
+		temp = *end;
+		*end = *start;
+		*start = temp;
+		--end;
+		++start;
+	}
+	for (int j = 0; j < len; ++j) {
+		printf("%c ", str[j]);
+	}
+}
+
+int main() {
+	char arr[] = { 0 };
+	printf("请输入一个字符串：");
+	gets(arr);
+	int length = strlen(arr);
+	reverseOver(arr, length);
+	system("pause");
+	return 0;
+}
+
+//写一个函数将字符串连接
+
+void connect(char* str1, char* str2,int len1,int len2) {
+	char newStr[100];
+	int len3 = len1;
+	for (int i = 0; i < len1; ++i) {
+		newStr[i] = str1[i];
+	}
+	for (int j = 0; j < len2; ++j) {
+		newStr[len3] = str2[j];
+		len3++;
+	}
+	newStr[len1 + len2] = '\0';
+	puts(newStr);
+}
+
+int main() {
+	char arr1[] = "abc";
+	char arr2[] = "efgh";
+	int length1 = strlen(arr1);
+	int length2 = strlen(arr2);
+	connect(arr1, arr2, length1, length2);
+	system("pause");
+	return 0;
+}
+#endif
+
