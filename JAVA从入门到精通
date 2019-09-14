@@ -115,7 +115,72 @@ public class Book1{
          for (int i : list) {
              System.out.println(i);
          }
+        
+        
+        
+        //P83
+        //使用for循环输出空心的菱形
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入菱形上半部分的大小：");
+        int halfSize = scanner.nextInt();
+        //打印上半部分的菱形
+        for (int i = 1; i <= halfSize; i++) {
+            //第一个循环代表第i行
+            for (int j = 1; j <= halfSize - i; j++) {
+                //第二个循环代表打印第i行的空格
+                System.out.print(" ");
+            }
+            for (int c = 1; c <= 2 * i - 1; c++) {
+                //第三个循环代表打印第i行的*
+                if (c == 1 || c == 2 * i - 1) {
+                    System.out.print("*");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+        //打印下半部分的菱形
+        for (int i = 1; i < halfSize; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print(" ");
+            }
+            for (int c = 1; c <= 2 * halfSize - 2 * i - 1; c++) {
+                if (c == 1 || c == 2 * halfSize - 2 * i - 1) {
+                    System.out.print("*");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
         */
 
+
+        // int triangle[][] = new int[8][];
+        // int len = triangle.length;
+        // System.out.println(len);
+
+        //P84
+        //使用for循环输出杨辉三角
+        //创建二维数组
+        int triangle[][] = new int[8][];
+        //开始遍历二维数组
+        for (int i = 0; i < triangle.length; i++) {
+            //初始化第二层数组的大小
+            //举例：第一行只有一列，第二行有两列，第三行有三列
+            triangle[i] = new int[i + 1]; 
+            //开始遍历第二层数组
+            for (int j = 0; j <= triangle[i].length - 1; j++) {
+                if (i == 0 || j == 0 || j == triangle[i].length - 1) {
+                    triangle[i][j] = 1;
+                } else {
+                    triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+                }
+                System.out.print(triangle[i][j] + "\t");
+            }
+            System.out.println();
+        }
     }
 }
