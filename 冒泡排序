@@ -53,9 +53,5 @@ char FirstNotRepeatingChar(char* string){
 	pHashKey = string;
 	while (*(pHashKey) != '\0'){
 		if (hashTable[*pHashKey] == 1){
-			return *pHashKey;
-		}
-		pHashKey++;
-	}
-	return '\0';
+			r
 
