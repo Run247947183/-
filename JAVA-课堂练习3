@@ -1,0 +1,116 @@
+import java.util.Arrays;
+
+public class Class3 {
+    public static void main(String[] args) {
+        /*
+        //参数传内置类型(重点)
+        int num = 0;
+        func(num);
+        System.out.println("num = " + num);
+    }
+    public static void func(int x) {
+        x = 10;
+        System.out.println("x = " + x);
+
+        
+        //参数传数组问题
+        int []arr = { 1, 2 ,3};
+        func(arr);
+        System.out.println("arr[0] = " + arr[0]);
+    }
+    public static void func(int[] str) {
+        str[0] = 1010;
+        System.out.println("str[0] = " + str[0]);
+        
+        
+        //数组转字符串
+        //简便做法
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        String newArr = Arrays.toString(arr);
+        System.out.println(newArr);
+
+        //自己实现的版本
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        System.out.println(tostring(arr));
+    }
+    public static String tostring(int[] str) {
+        String ret = "[";
+        for (int i = 0; i < str.length; i++) {
+            ret += str[i];
+            if (i != str.length - 1) {
+                ret += ", ";
+            }
+        }
+        ret += "]";
+        return ret;
+
+
+        //数组拷贝
+        //简便版本
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        //注意：copyOf是将数组进行了深拷贝，又创建了一个数组对象
+        //拷贝原有的数组中的所有元素到新的数组中，不会影响原来的数组
+        int[] newArr = Arrays.copyOf(arr,arr.length);
+        System.out.println("newArr: " + Arrays.toString(newArr));
+
+        arr[0] = 10;
+        System.out.println("arr: " + Arrays.toString(arr));
+        System.out.println("newArr: " + Arrays.toString(newArr));
+
+
+        //自己实现的版本
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        int[] newArr = copyOf(arr);
+        System.out.println("newArr: " + Arrays.toString(newArr));
+    }
+    public static int[] copyOf(int[] arr) {
+        int[] ret = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            ret[i] = arr[i];     
+        }
+        return ret;
+
+
+        //找元素中的最大元素
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        System.out.println("最大元素为： " + max(arr));
+    }
+    public static int max(int[] str) {
+        int temp = str[0];
+        for (int i = 1; i < str.length; i++) {
+            if (str[i] > temp) {
+                temp = str[i];
+            }
+        }
+        return temp;
+
+
+        //求数组中元素的平均值
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        System.out.println("数组平均值为： " + avg(arr));
+    }
+    public static double avg(int[] arr) {
+        double sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum /= arr.length;
+
+        //查找数组中的指定元素
+
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        System.out.println(find(arr,10));
+    }
+    public static int find(int[] arr,int num) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == num) {
+                return i;
+            }
+        }
+        return -1;
+        */
+
+
+        //
+    }
+}
