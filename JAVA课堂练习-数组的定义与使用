@@ -1,0 +1,236 @@
+import java.util.Arrays;
+
+public class Class3 {
+    static int count = 0;
+    public static void main(String[] args) {
+        /*
+        //参数传内置类型(重点)
+        int num = 0;
+        func(num);
+        System.out.println("num = " + num);
+    }
+    public static void func(int x) {
+        x = 10;
+        System.out.println("x = " + x);
+
+        
+        //参数传数组问题
+        int []arr = { 1, 2 ,3};
+        func(arr);
+        System.out.println("arr[0] = " + arr[0]);
+    }
+    public static void func(int[] str) {
+        str[0] = 1010;
+        System.out.println("str[0] = " + str[0]);
+
+        
+        //数组转字符串
+        //简便做法
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        String newArr = Arrays.toString(arr);
+        System.out.println(newArr);
+
+        //自己实现的版本
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        System.out.println(tostring(arr));
+    }
+    public static String tostring(int[] str) {
+        String ret = "[";
+        for (int i = 0; i < str.length; i++) {
+            ret += str[i];
+            if (i != str.length - 1) {
+                ret += ", ";
+            }
+        }
+        ret += "]";
+        return ret;
+
+
+        //数组拷贝
+        //简便版本
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        //注意：copyOf是将数组进行了深拷贝，又创建了一个数组对象
+        //拷贝原有的数组中的所有元素到新的数组中，不会影响原来的数组
+        int[] newArr = Arrays.copyOf(arr,arr.length);
+        System.out.println("newArr: " + Arrays.toString(newArr));
+
+        arr[0] = 10;
+        System.out.println("arr: " + Arrays.toString(arr));
+        System.out.println("newArr: " + Arrays.toString(newArr));
+
+
+        //自己实现的版本
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        int[] newArr = copyOf(arr);
+        System.out.println("newArr: " + Arrays.toString(newArr));
+    }
+    public static int[] copyOf(int[] arr) {
+        int[] ret = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            ret[i] = arr[i];     
+        }
+        return ret;
+
+
+        //找元素中的最大元素
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        System.out.println("最大元素为： " + max(arr));
+    }
+    public static int max(int[] str) {
+        int temp = str[0];
+        for (int i = 1; i < str.length; i++) {
+            if (str[i] > temp) {
+                temp = str[i];
+            }
+        }
+        return temp;
+
+
+        //求数组中元素的平均值
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        System.out.println("数组平均值为： " + avg(arr));
+    }
+    public static double avg(int[] arr) {
+        double sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum /= arr.length;
+
+        //查找数组中的指定元素
+
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        System.out.println(find(arr,10));
+    }
+    public static int find(int[] arr,int num) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == num) {
+                return i;
+            }
+        }
+        return -1;
+
+        //查找数组中的指定元素（二分查找）
+        // int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] arr = makeBigArray();
+        int ret = binarysearch(arr, 8888);
+        System.out.println("ret = " + ret + " count = " + count);
+    }
+    public static int[] makeBigArray() {
+        int[] arr = new int[10000];
+        for (int i = 0; i < 10000; i++) {
+            arr[i] = i;
+        }
+        return arr;
+    }
+    public static int binarysearch(int[] arr,int toFind) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            count++;
+            int mid = (left + right) / 2;
+            if (toFind < arr[mid]) {
+                right = mid - 1;
+            } else if (toFind > arr[mid]) {
+                left = left + 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
+
+        //检查数组的有序性
+        int[] arr = { 1, 2, 3, 4, 5, 6};
+        System.out.println(isSorted(arr));
+    }
+    public static boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            //会发生越界，将长度 - 1
+            if (arr[i] > arr[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+        */
+
+        /*
+
+        //数组排列（冒泡排序）
+        int[] arr = { 9, 5, 2, 7};
+        bubbleSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+    public static int[] bubbleSort(int[] arr) {
+        int bound = 0;
+        int temp = 0;
+        for (bound = arr.length - 1; bound >= 0; bound--) {
+            for (int cur = 0; cur < bound; cur++) {
+                if (arr[cur + 1] > arr[cur]) {
+                    temp = arr[cur + 1];
+                    arr[cur + 1] = arr[cur];
+                    arr[cur] = temp;
+                }
+            }
+        }
+        return arr;
+
+
+        //数组逆序
+        //给定一个数组，将里面的元素逆序排列
+        //下列数组逆序后为：7，2，5，9
+        int[] arr = { 9, 5, 2, 7};
+        reverse(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+    public static void reverse(int[] arr) {
+        int left = 0;
+        int right = arr.length - 1;
+        int temp = 0;
+        while (left <= right) {
+            temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
+        }
+
+
+        //数组数字排列
+        //给定一个整型数组，将所有的偶数放在前半部分，将所有的奇数放在数组的后半部分
+        int[] arr = { 5, 2, 3, 4, 1, 19, 28, 18, 17, 20};
+        arrange(arr);
+        System.out.println(Arrays.toString(arr));
+    } 
+    public static void arrange(int[] arr) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            if (arr[left] % 2 != 0) {
+                if (arr[right] % 2 == 0) {
+                    int temp = arr[left];
+                    arr[left] = arr[right];
+                    arr[right] = temp;
+                } else {
+                    right--;
+                }
+            } else {
+                left++;
+            }
+        }        
+        */
+
+
+        //二维数组
+        int[][] arr = {
+            { 1, 2, 3, 4},
+            { 5, 6, 7, 8},
+            { 9, 10, 11, 12}
+        };
+        for (int row = 0; row < arr.length; row++) {
+            for (int col = 0; col < arr[row].length; col++) {
+                System.out.printf("%d\t",arr[row][col]);
+            }
+            System.out.println();
+        }
+    }
+}
