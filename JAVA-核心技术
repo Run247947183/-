@@ -1,0 +1,176 @@
+import java.util.Arrays;
+
+import java.util.Scanner;
+
+public class Book2 {
+    public static void main(String[] args) {
+        //第一种创建数组方法
+        // int[] a;
+        // a = new int[10];
+        //第二种创建方法
+        // boolean[] a = new boolean[3];
+        // a[2] = true;
+        // int[] a = new int[3];
+        // a[2] = 10;
+        // String[] a = new String[3];
+        // for (int i = 0; i < 3; i++) {
+            // a[i] = "";       
+        // }
+        // int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        // for (int x : a) {
+        //     System.out.println(x);
+        // }
+        // a[0] = 100;
+
+        // int[] a = { 1, 2, 3};
+        // int[] b = a;
+        // int[] a = { 2, 3, 5, 7, 11, 12};
+        // int [] c = a;
+        // a[0] = 1000;
+        // int[] c = Arrays.copyOf(a,3);
+        // a[0] = 1000;
+        // System.out.println(Arrays.toString(c));
+        /*
+        if (args.length == 0 || args[0].equals("-h")) {
+            System.out.print("Hello,");
+        } else if (args[0].equals("-g")) {
+            System.out.print("Goodbye,");
+        }
+        for (int i = 1; i < args.length; i++) {
+            System.out.print(" " + args[i]);
+        }
+        System.out.println("!");
+        args[0] = "-g";
+        System.out.println(args[0]);
+        int[] a = { 2, 19, 4, 7, 1, 29};
+        Arrays.sort(a);
+        System.out.println(Arrays.toString(a);
+
+
+
+        //产生一个抽彩游戏中的随机数指组
+        //例如，从49个数值中抽取6个
+        //那么这6个数可能为：4，7，8，19，30，44
+        java.util.Scanner scanner = new Scanner(System.in);
+        System.out.println("你想要抽取几个数字？");
+        int k = scanner.nextInt();
+        System.out.println("你可以抽取的最高数字是多少？");
+        int n = scanner.nextInt();
+        //可以从numbers区间里抽取数字
+        int[] numbers = new int[n];
+        //填充nunbers里的值
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = i + 1;
+        }
+        //数组result里存放的是抽取的数字
+        int[] result = new int[k];
+        //开始抽取数字
+        for (int j = 0; j < result.length; j++) {
+            //创建一个随机的数字，这个数字作为后面numbers数组的下标
+            //Math.random()方法返回一个0到1（不包括1）的随机浮点数
+            // * n 则表示返回一个从 0 到 n - 1之间的一个随机数
+            int r = (int) (Math.random() * n);
+            result[j] = numbers[r];
+            //因为是抽彩的数值必须不相同
+            //所有我们需要将numbers里的值设为不同的
+            numbers[r] = numbers[n - 1];
+            n--;
+        }
+        //给result抽取的数字排序
+        Arrays.sort(result);
+        System.out.println("抽彩能让你发家致富!");        
+        for (int x : result) {
+            System.out.println(x);
+        }
+        // System.out.println(Arrays.toString(result));
+
+
+        int[][] a = {
+            { 1, 2, 3},
+            { 4, 5, 6},
+            { 7, 8, 9}
+        };
+        for (int[] x : a) {
+            for (int y : x) {
+                System.out.println(y);
+            }
+        }
+
+
+        //显示不同利率下投资$10000会增长多少
+        final int NRATES = 6;
+        final double STARTEATE = 10;
+        final int NYEARS = 10;
+        double[] interestRate = new double[NRATES];
+        for (int i = 0; i < interestRate.length; i++) {
+            interestRate[i] = (STARTEATE + i) / 100.0;
+        }
+        double[][] balances = new double[NYEARS][NRATES];
+        //将第一年都设为10000
+        for (int i = 0; i < balances[0].length; i++) {
+            balances[0][i] = 10000;
+        }
+        for (int i = 1; i < balances.length; i++) {
+            for (int j = 0; j < balances[i].length; j++) {
+                //上一年的本金
+                double oldbalance = balances[i - 1][j];
+                //上一年的利息
+                double interest = oldbalance * interestRate[j];
+                balances[i][j] = oldbalance + interest;
+            }
+        }
+        //打印每一年的利率
+        for (int j = 0; j < interestRate.length; j++) {
+            System.out.printf("%9.0f%%",100 * interestRate[j]);
+        }
+        System.out.println();
+        //打印每一年的本金利息和
+        for (double[] row : balances) {
+            for (double b : row) {
+                System.out.printf("%10.2f",b);
+            }
+            System.out.println();
+        }
+
+
+
+
+        //给定两个int变量的值，交换变量的值
+        int a = 10;
+        int b = 20;
+        int temp = 0;
+        temp = a;
+        a = b;
+        b = temp;
+        System.out.println("a = " + a + " b = " + b);
+
+
+        int[][] a = new int[11][];
+        for (int i = 0; i <= 10; i++) {
+            a[i] = new int[i + 1];
+        }
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+                System.out.printf("%d ",a[i][j]);
+            }
+            System.out.println();
+        }
+        */
+
+
+        //
+        final int MAX = 10;
+        int[][] odds = new int[MAX + 1][];
+        for (int n = 0; n <= MAX; n++) {
+            odds[n] = new int[n + 1];
+        }
+        for (int k = 0; k < odds.length; k++) {
+            odds[k][0] = 1;
+        }
+        for (int i = 1; i < odds.length; i++) {
+            for (int j = 0; j < odds[i].length; j++) {
+                                  
+            }
+        }
+    }
+}
