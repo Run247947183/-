@@ -47,11 +47,3 @@ char FirstNotRepeatingChar(char* string){
 		hashTable[i] = 0;
 	}
 	char* pHashKey = string;
-	while (*(pHashKey) != '\0'){
-		hashTable[*(pHashKey++)]++;//???????????
-	}
-	pHashKey = string;
-	while (*(pHashKey) != '\0'){
-		if (hashTable[*pHashKey] == 1){
-			r
-
