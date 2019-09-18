@@ -42,6 +42,4 @@ char FirstNotRepeatingChar(char* string){
 	if (string == NULL){
 		return '\0';
 	}
-	unsigned int hashTable[TableSize];
-	for (unsigned int i = 0; i < TableSize; ++i){
-
+	unsigned int hashTable[Table
