@@ -34,12 +34,3 @@ int main(){
 	}printf("\n");
 	system("pause");
 }
-
-/
-#define TableSize 256
-
-char FirstNotRepeatingChar(char* string){
-	if (string == NULL){
-		return '\0';
-	}
-	unsigned int hashTable[Table
