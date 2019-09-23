@@ -1,0 +1,112 @@
+import org.omg.CORBA.PUBLIC_MEMBER;
+
+import java.util.Arrays;
+
+public class SeqList {
+    //创建一个数组，里面最多有10个元素
+    // 但是里面可能有效元素为0
+    // 执行插入操作后，被插入的元素才是有效元素
+    private int[] data = new int[10];
+    //size表示当前数组中有多少个有效元素
+    private int size = 0;
+
+    //打印
+    public void display() {
+    //    System.out.println(Arrays.toString(data));
+        System.out.print("[");
+        for (int i = 0; i < size; i++) {
+            System.out.print(data[i]);
+            if (i != size -1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+
+    //pos 把元素放到哪个下标上，elem表示插入的元素是什么
+    public void add(int pos, int elem) {
+        //pos == size 允许插入，相当于尾插
+        if (pos < 0 || pos > size) {
+            //pos 位置无效
+            return;
+        }
+        if (this.size >= this.data.length) {
+            //当前容量不够，需要扩容
+            //申请一块更大的空间，把原有数据拷贝进去
+            realloc();
+        }
+        if (pos == size) {
+            //尾插的情况，直接把元素放到size下标的位置上
+            this.data[pos] = elem;
+            this.size++;
+            return;
+        }
+        //处理插入中间位置的情况，把后面的元素依次往前
+        for (int i = this.size; i > pos; i--) {
+            this.data[i] = this.data[i - 1];
+        }
+        this.data[pos] = elem;
+        this.size++;
+    }
+    private void realloc() {
+        //扩容的策略很灵活，根据实际问题场景的特点
+        //来决定具体是线性增长还是指数增长或者其他方式
+        int[] newdata = new int[this.data.length * 2];
+        for (int i = 0; i < this.data.length; i++) {
+            newdata[i] = this.data[i];
+        }
+        this.data = newdata;
+    }
+    //判断某个元素是否存在
+    public boolean contains(int toFind) {
+        for (int i = 0; i < this.size; i++) {
+            if (this.data[i] == toFind) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //寻找某个元素，放回下标
+    public int search(int toFind) {
+        for (int i = 0; i < this.size; i++) {
+            if (this.data[i] == toFind) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    //获取pos位置的元素
+    public int getPos(int pos) {
+        return this.data[pos];
+    }
+    //给pos位置的元素设为 elem
+    public void setPos(int pos, int elem) {
+        this.data[pos] = elem;
+    }
+    //删除第一次出现的值
+    public void remove(int toRemove) {
+        int pos = search(toRemove);
+        if (pos == -1) {
+            //这个值不存在，不必要删除
+            return;
+        }
+        if (pos == this.size - 1) {
+            //如果是最后一个元素，直接size--
+            //因为size描述了有效元素的个数
+            size--;
+        }
+        //如果删除一个普通（中间的）的位置,也需要进行搬运
+        for (int i = pos; i < size - 1; i++) {
+            this.data[i] = this.data[i + 1];
+        }
+        this.size--;
+    }
+    //获取长度
+    public int size() {
+        return this.size;
+    }
+    //清空顺序表
+    public void clear() {
+        this.size = 0;
+    }
+}
