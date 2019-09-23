@@ -1,0 +1,109 @@
+
+public class Test1 {
+    public static void main(String[] args) {
+        TestAdd();
+        TestContains();
+        TestSearch();
+        TestPos();
+        TestSetPos();
+        TestRemove();
+        TestSize();
+        TestClear();
+    }
+    public static void Build(SeqList seqlist) {
+
+        seqlist.add(0, 10);
+        seqlist.add(1, 20);
+        seqlist.add(2, 30);
+        seqlist.add(3, 40);
+        seqlist.add(2, 100);
+
+    }
+
+    public static void TestAdd() {
+        System.out.println("测试 add 方法：");
+        SeqList seqlist = new SeqList();
+        Build(seqlist);
+//        seqlist.add(0, 10);
+//        seqlist.add(1, 20);
+//        seqlist.add(2, 30);
+//        seqlist.add(3, 40);
+//        seqlist.add(2, 100);
+
+        System.out.print("预期值：[10, 20, 100, 30, 40]");
+        System.out.print(" 实际值：");
+        seqlist.display();
+
+    }
+
+    public static void TestContains() {
+        System.out.println("测试 Contains 方法：");
+        SeqList seqlist = new SeqList();
+
+        Build(seqlist);
+
+        boolean result = seqlist.contains(10);
+        System.out.println("result 预期是true  实际是  " + result);
+    }
+    public static void TestSearch() {
+        System.out.println("测试 Search 方法：");
+        SeqList seqlist = new SeqList();
+
+        Build(seqlist);
+
+        int result = seqlist.search(100);
+        System.out.println("result 预期是2  实际是  " + result);
+    }
+    public static void TestPos() {
+        System.out.println("测试 Pos 方法：");
+        SeqList seqlist = new SeqList();
+
+        Build(seqlist);
+
+        int result = seqlist.getPos(4);
+        System.out.println("result 预期是30  实际是 " + result);
+    }
+
+    public static void TestSetPos() {
+        System.out.println("测试 SetPos 方法：");
+        SeqList seqlist = new SeqList();
+
+        Build(seqlist);
+
+        seqlist.setPos(0, 200);
+        System.out.print("预期值是：[200, 20, 100, 30, 40]");
+        System.out.print(" 实际是： ");
+        seqlist.display();
+    }
+    public static void TestRemove() {
+        System.out.println("测试 Remove 方法：");
+        SeqList seqlist = new SeqList();
+
+        Build(seqlist);
+
+        seqlist.remove(100);
+        System.out.print("预期值是：[10, 20, 30, 40]");
+        System.out.print(" 实际值是：");
+        seqlist.display();
+    }
+    public static void TestSize() {
+        System.out.println("测试 Size 方法：");
+        SeqList seqlist = new SeqList();
+
+        Build(seqlist);
+
+        int result = seqlist.size();
+        System.out.println("预期值：5  实际值：" + result);
+    }
+    public static void TestClear() {
+        System.out.println("测试 Clear 方法：");
+        SeqList seqlist = new SeqList();
+
+        Build(seqlist);
+
+        seqlist.clear();
+        System.out.print("预期值：[]");
+        System.out.print(" 实际值：");
+        seqlist.display();
+    }
+}
