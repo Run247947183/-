@@ -1,0 +1,28 @@
+public class Demo01 {
+    public ListNode reverseList(ListNode head) {
+        //1.对于空链表，不需要处理
+        if (head == null) {
+            return null;
+        }
+        //2.对于只有一个元素的链表，也不需要处理
+        if (head.next == null) {
+            return head;
+        }
+        //3.处理链表中有多个节点的逆序操作
+        ListNode newHead = null;
+        ListNode cur = head;
+        ListNode prev = null;
+        while (cur != null) {
+            ListNode next = cur.next;
+            if (head == next) {
+                newHead = cur;
+            }
+            //翻转引用的指向
+            cur.next = prev;
+            //更新 prev 和 cur
+            prev = cur;
+            cur = next;
+        }
+        return newHead;
+    }
+}
