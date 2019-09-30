@@ -1,0 +1,41 @@
+import java.util.*;
+
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Partition {
+    public ListNode partition(ListNode pHead, int x) {
+        if (pHead == null) {
+            return null;
+        }
+        if (pHead.next == null) {
+            // 只有一个元素
+            return pHead;
+        }
+        ListNode smallHead = new ListNode(-1);
+        ListNode smallTail = smallHead;
+        ListNode bigHead = new ListNode(-1);
+        ListNode bigTail = bigHead;
+        for (ListNode cur = pHead;
+                cur != null; cur = cur.next) {
+            if (cur.val < x) {
+                // 插入到 smallTail 之后
+                smallTail.next = new ListNode(cur.val);
+                smallTail = smallTail.next;
+            } else {
+                // 插入到 bigTail 之后
+                bigTail.next = new ListNode(cur.val);
+                bigTail = bigTail.next;
+            }
+        }
+        smallTail.next = bigHead.next;
+        return smallHead.next;
+        // write code here
+    }
+}
