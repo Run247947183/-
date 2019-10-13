@@ -1,0 +1,235 @@
+/*
+public class TestDLinkedList {
+    public static void main(String[] args) {
+        testAddFirst();
+        testAddLast();
+        testAddIndex();
+        testContains();
+        testRemove();
+        testRomoveAll();
+        testClear();
+    }
+    public static void testAddFirst() {
+        System.out.println("测试头插：");
+        DLinkedList list = new DLinkedList();
+        list.addFirst(1);
+        list.addFirst(2);
+        list.addFirst(3);
+        list.addFirst(4);
+        list.display();
+    }
+    public static void testAddLast() {
+        System.out.println("测试尾插：");
+        DLinkedList list = new DLinkedList();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+        list.display();
+    }
+    public static void testAddIndex() {
+        System.out.println("测试普通插入：");
+        DLinkedList list = new DLinkedList();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+        list.addIndex(2,100);
+        list.display();
+    }
+    public static void testContains() {
+        System.out.println("测试是否包含某个元素：");
+        DLinkedList list = new DLinkedList();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+        boolean result = list.contains(1);
+        System.out.println(result);
+    }
+    public static void  testRemove() {
+        System.out.println("测试删除第一次出现关键字为key的节点：");
+        DLinkedList list = new DLinkedList();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+        list.remove(4);
+        list.display();
+    }
+    public static void testRomoveAll() {
+        System.out.println("测试删除全部出现关键字为key的节点：");
+        DLinkedList list = new DLinkedList();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(2);
+        list.addLast(2);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+        list.removeAll(2);
+        list.display();
+    }
+    public static void testClear() {
+        System.out.println("测试清除所有节点：");
+        DLinkedList list = new DLinkedList();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+        list.clear();
+        list.display();
+    }
+}
+*/
+class DLinkedNode {
+    public int val = 0;
+    public DLinkedNode prev = null;
+    public DLinkedNode next = null;
+
+    public DLinkedNode(int val) {
+        this.val = val;
+    }
+}
+public class DLinkedList {
+    private DLinkedNode head = null;
+
+    public DLinkedList() {
+        //创建傀儡节点
+        head = new DLinkedNode(-1);
+        //带环
+        head.next = head;
+        head.prev = head;
+    }
+
+    //头插
+    public void addFirst(int data) {
+        //1.创建一个新的节点
+        DLinkedNode newNode = new DLinkedNode(data);
+        DLinkedNode next = head.next;
+
+        head.next = newNode;
+        newNode.next = next;
+
+        newNode.prev = head;
+        next.prev = newNode;
+    }
+
+    //打印
+    public void display() {
+        System.out.print("正向：[");
+        for (DLinkedNode cur = head.next; cur != head; cur = cur.next) {
+            System.out.print(cur.val);
+            if (cur.next != head) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+
+        System.out.print("反向：[");
+        for (DLinkedNode cur = head.prev; cur != head; cur = cur.prev) {
+            System.out.print(cur.val);
+            if (cur.prev != head) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+
+    //尾插
+    public void addLast(int data) {
+        DLinkedNode newNode = new DLinkedNode(data);
+        //这节点是新节点的前一个节点
+        //head 就是新的节点的后一个节点
+        DLinkedNode prev = head.prev;
+
+        newNode.next = head;
+        head.prev = newNode;
+        prev.next = newNode;
+        newNode.prev = prev;
+    }
+    public void addIndex(int index,int data) {
+        int size = size();
+        if (index < 0 || index > size) {
+            return;
+        }
+        if (index == 0) {
+            addFirst(data);
+            return;
+        }
+        if (index == size) {
+            addLast(data);
+            return;
+        }
+        DLinkedNode next = getpos(index);
+        DLinkedNode prev = next.prev;
+
+        DLinkedNode newNode = new DLinkedNode(data);
+        prev.next = newNode;
+        newNode.prev = prev;
+
+        next.prev = newNode;
+        newNode.next =  next;
+    }
+    public DLinkedNode getpos(int index) {
+        DLinkedNode cur = head.next;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        return cur;
+    }
+    public int size() {
+        int size = 0;
+        for (DLinkedNode cur = head.next;
+                    cur != head; cur = cur.next) {
+            size++;
+        }
+        return size;
+    }
+    public boolean contains(int toFind) {
+        for (DLinkedNode cur = head.next;
+                cur != head; cur = cur.next) {
+            if (cur.val == toFind) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void remove(int key) {
+        DLinkedNode toRemove = find(key);
+        if (toRemove == null) {
+            return;
+        }
+        DLinkedNode prev = toRemove.prev;
+        DLinkedNode next = toRemove.next;
+
+        prev.next = next;
+        next.prev = prev;
+    }
+    public DLinkedNode find(int key) {
+        for (DLinkedNode cur = head.next;
+                cur != head; cur = cur.next) {
+            if (cur.val == key) {
+                return cur;
+            }
+        }
+        return null;
+    }
+    public void removeAll(int key) {
+        while (true) {
+            DLinkedNode toRemove = find(key);
+            if (toRemove == null) {
+                return;
+            }
+            DLinkedNode prev = toRemove.prev;
+            DLinkedNode next = toRemove.next;
+
+            prev.next = next;
+            next.prev = prev;
+        }
+    }
+    public void clear() {
+        head.next = head;
+        head.prev = head;
+    }
+}
