@@ -1,0 +1,28 @@
+/*
+public class B {
+    public B() {
+        func();
+        System.out.println("构造 B 方法");
+    }
+    public void func() {
+        System.out.println("B.func");
+    }
+}
+
+public class D extends B{
+    private int num = 1000;
+    public D() {
+        System.out.println("构造 D 对象");
+    }
+    public void func() {
+        System.out.println("D.func " + num);
+    }
+}
+
+*/
+
+public class Test {
+    public static void main(String[] args) {
+        D d = new D();
+    }
+}
