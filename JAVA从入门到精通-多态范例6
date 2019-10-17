@@ -1,0 +1,48 @@
+/*
+
+P184  简单的汽车销售商场
+
+
+public abstract class Car {
+    public abstract String getInfo();
+}
+
+
+public class BMW extends Car{
+    @Override
+    public String getInfo() {
+        return "BMW";
+    }
+}
+
+public class Benz extends Car{
+    @Override
+    public String getInfo() {
+        return "Benz";
+    }
+}
+
+public class CarFactory {
+    public static Car getCar(String name) {
+        if (name.equals("BMW")) {
+            return new BMW();
+        } else if (name.equals("Benz")) {
+            return new Benz();
+        } else {
+            return null;
+        }
+    }
+}
+
+*/
+
+public class Customer {
+    public static void main(String[] args) {
+        System.out.println("顾客购买BMW：");
+        Car bmw = CarFactory.getCar("BMW");
+        System.out.println("提取汽车：" + bmw.getInfo());
+        System.out.println("顾客购买Benz：");
+        Car benz = CarFactory.getCar("Benz");
+        System.out.println("提取汽车：" + benz.getInfo());
+    }
+}
