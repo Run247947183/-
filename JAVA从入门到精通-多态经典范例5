@@ -1,0 +1,48 @@
+/*
+P183  计算几何图形的面积
+
+public abstract class Shape {
+    public String getName() {
+        return this.getClass().getSimpleName();
+    }
+    public abstract double getArea();
+}
+
+public class Circle extends Shape {
+    private double radius;
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double getArea() {
+        return Math.PI * Math.pow(radius,2);
+    }
+}
+
+public class Rect extends Shape {
+    private double length;
+    private double width;
+    public Rect(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    public double getArea() {
+        return length * width;
+    }
+}
+
+*/
+
+public class Test {
+    public static void main(String[] args) {
+        Circle circle = new Circle(1);
+        System.out.println("图形的名称为：" + circle.getName());
+        System.out.println("图形的面积为：" + circle.getArea());
+        Rect rect = new Rect(1,1);
+        System.out.println("图形的名称为：" + rect.getName());
+        System.out.println("图形的面积为：" + rect.getArea());
+    }
+}
