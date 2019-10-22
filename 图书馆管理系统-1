@@ -295,7 +295,6 @@ public class ReturnOperation implements IOperation {
                 break;
             }
             book.setBorrowed(false);
-        }
 
     }
 }
