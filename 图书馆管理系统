@@ -1,0 +1,617 @@
+public class TestBOOK {
+    /*
+
+//book包中
+//(1)Book
+
+public class Book {
+    private String name;
+    private String id;
+    private String author;
+    private int price;
+    private String type;
+    private boolean isBorrowed;
+
+    public Book(String name, String id, String author,
+                int price, String type, boolean isBorrowed) {
+        this.name = name;
+        this.id = id;
+        this.author = author;
+        this.price = price;
+        this.type = type;
+        this.isBorrowed = isBorrowed;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isBorrowed() {
+        return isBorrowed;
+    }
+
+    public void setBorrowed(boolean borrowed) {
+        isBorrowed = borrowed;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                ", author='" + author + '\'' +
+                ", price=" + price +
+                ", type='" + type + '\'' +
+                ", isBorrowed=" + isBorrowed +
+                '}';
+    }
+}
+
+//（2）BookList
+
+
+import package5.B;
+
+public class BookList {
+    //一共由 100 本书
+    private Book[] books = new Book[100];
+    //现在由 size 本书
+    private int size;
+
+    public BookList() {
+        books[0] = new Book("金瓶梅",
+                "001","兰陵笑笑生",
+                100,"古典名著",false);
+        books[1] = new Book("水浒传",
+                "002","施耐庵",
+                100,"古典名著",false);
+        books[2] = new Book("西游记",
+                "003","吴承恩",
+                100,"古典名著",false);
+        size = 3;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public Book getBook(int index) {
+        return books[index];
+    }
+
+    public void setBook(int index, Book book) {
+        books[index] = book;
+    }
+}
+
+//operation包中
+
+//(1)IOperation接口
+
+
+import package_bookmanager.book.BookList;
+
+public interface IOperation {
+    void work(BookList bookList);
+}
+
+
+//（2）AddOperation
+
+
+import package_bookmanager.book.Book;
+import package_bookmanager.book.BookList;
+
+import java.util.Scanner;
+
+public class AddOperation implements IOperation {
+    @Override
+    public void work(BookList bookList) {
+        System.out.println("新增一本书籍");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入书名：");
+        String name = scanner.next();
+        System.out.println("请输入序号：");
+        String id = scanner.next();
+        System.out.println("请输入作者：");
+        String author = scanner.next();
+        System.out.println("请输入价格：");
+        int price = scanner.nextInt();
+        System.out.println("请输入类别：");
+        String type = scanner.next();
+        Book book = new Book(name,id,author,
+                price,type,false);
+        bookList.setBook(bookList.getSize(),book);
+        bookList.setSize(bookList.getSize() + 1);
+    }
+}
+
+//(3)FindOperation
+
+
+import package5.B;
+import package_bookmanager.book.Book;
+import package_bookmanager.book.BookList;
+
+import java.util.Scanner;
+
+public class    FindOperation implements IOperation {
+    @Override
+    public void work(BookList bookList) {
+        System.out.println("查找书籍");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入要查找的书名");
+        String name = scanner.next();
+        int count = 0;
+        for (int i = 0; i < bookList.getSize(); i++) {
+            Book book = bookList.getBook(i);
+            if (book.getName().equals(name)) {
+//                打印这本书的信息
+                System.out.println(book);
+                count++;
+            }
+        }
+        if (count == 0) {
+            System.out.println("没找到此书");
+        } else {
+            System.out.println("共计找到 " + count + " 本书");
+        }
+    }
+}
+
+//(4)PrintOperation
+
+
+import package_bookmanager.book.BookList;
+
+public class PrintOperation implements IOperation {
+    @Override
+    public void work(BookList bookList) {
+        System.out.println("打印所有书籍信息");
+        for (int i = 0; i < bookList.getSize(); i++) {
+            System.out.println(bookList.getBook(i));
+        }
+        System.out.println("共计 " + bookList.getSize() + " 本书");
+    }
+}
+
+//(5)DelOperation
+
+
+import package5.B;
+import package_bookmanager.book.Book;
+import package_bookmanager.book.BookList;
+
+import java.util.Scanner;
+
+public class DelOperation implements IOperation {
+    @Override
+    public void work(BookList bookList) {
+        System.out.println("删除书籍");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入要删除的序号：");
+        String id = scanner.next();
+//        先查找
+        int i = 0;
+        for (; i < bookList.getSize(); i++) {
+            Book book = bookList.getBook(i);
+            if (book.getId().equals(id)) {
+//                找到了
+                break;
+            }
+        }
+        if (i >= bookList.getSize()) {
+//            没找到
+            System.out.println("未找到要删除书籍!");
+            return;
+        }
+//        处理找到了的情况
+//        直接用最后一个元素覆盖当前要删除的元素
+//        再进行尾删
+        Book lastBook = bookList.getBook(bookList.getSize() - 1);
+        bookList.setBook(i,lastBook);
+        bookList.setSize(bookList.getSize() - 1);
+        System.out.println("删除成功!");
+    }
+}
+
+
+//(6)ExitOperation
+
+
+import package_bookmanager.book.BookList;
+
+public class ExitOperation implements IOperation {
+    @Override
+    public void work(BookList bookList) {
+        System.out.println("goodbye!");
+//        类似于C语言中的 main 函数 return 0
+//        0 叫做"进程退出码"
+        System.exit(0);
+    }
+}
+
+//(7)BorrowOperation
+
+
+import package5.B;
+import package_bookmanager.book.Book;
+import package_bookmanager.book.BookList;
+
+import java.util.Scanner;
+
+public class BorrowOperation implements IOperation {
+    @Override
+    public void work(BookList bookList) {
+        System.out.println("借阅书籍");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入要借阅的书的编号：");
+        String id = scanner.next();
+        for (int i = 0; i < bookList.getSize(); i++) {
+            Book book = bookList.getBook(i);
+            if (!book.getId().equals(id)) {
+                continue;
+            }
+//            执行具体的借书操作
+            if (book.isBorrowed()) {
+                System.out.println("这本书已经被借走了！");
+                break;
+            }
+            book.setBorrowed(true);
+        }
+    }
+}
+
+//(8)ReturnOperation
+
+
+import package_bookmanager.book.Book;
+import package_bookmanager.book.BookList;
+
+import java.util.Scanner;
+
+public class ReturnOperation implements IOperation {
+    @Override
+    public void work(BookList bookList) {
+        System.out.println("归还书籍");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入要归还的书的编号：");
+        String id = scanner.next();
+        for (int i = 0; i < bookList.getSize(); i++) {
+            Book book = bookList.getBook(i);
+            if (!book.getId().equals(id)) {
+                continue;
+            }
+//            执行具体的还书操作
+            if (!book.isBorrowed()) {
+                System.out.println("这本书已经被归还！");
+                break;
+            }
+            book.setBorrowed(false);
+
+    }
+}
+
+//user包中
+//（1）User
+
+
+import package_bookmanager.book.Book;
+import package_bookmanager.book.BookList;
+import package_bookmanager.operation.IOperation;
+
+abstract public class User {
+    protected String name;
+
+//    持有当前用户支持的操作对象
+    protected IOperation[] operations;
+
+    public User(String name) {
+        this.name = name;
+    }
+
+//    打印一个操作菜单
+//    支持的操作不同，对应的才当也不同
+    abstract public int menu();
+
+//    根据用户输入的选项（menu返回结果）
+//    调用对应的操作对象
+//    注意多态在这个代码中的体现
+    public void doOperation(int choice, BookList bookList) {
+        operations[choice].work(bookList);
+    }
+}
+
+
+//(2)Admin
+
+
+import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
+import package_bookmanager.operation.*;
+
+import java.util.Scanner;
+
+public class Admin extends User{
+    public Admin(String name) {
+        super(name);
+        operations = new IOperation[]{
+                new ExitOperation(),
+                new FindOperation(),
+                new AddOperation(),
+                new DelOperation(),
+                new PrintOperation()
+        };
+    }
+    @Override
+    public int menu() {
+        System.out.println("==============");
+        System.out.println("hello " + name);
+        System.out.println("1. 查找书籍");
+        System.out.println("2. 增加书籍");
+        System.out.println("3. 删除书籍");
+        System.out.println("4. 打印所有书籍");
+        System.out.println("0. 退出");
+        System.out.println("==============");
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+        return choice;
+    }
+}
+
+
+//(3)NormalUser
+
+
+import package_bookmanager.operation.*;
+
+import java.util.Scanner;
+
+public class NormalUser extends User {
+    public NormalUser(String name) {
+        super(name);
+//        在这里构造 Operation 数组
+//        我们让数组中 Operation 对象的顺序和菜单中的序号相互匹配
+        operations = new IOperation[]{
+                new ExitOperation(),
+                new FindOperation(),
+                new BorrowOperation(),
+                new ReturnOperation()
+        };
+    }
+
+    @Override
+    public int menu() {
+        System.out.println("==============");
+        System.out.println("hello " + name);
+        System.out.println("1. 查找图书");
+        System.out.println("2. 借阅图书");
+        System.out.println("3. 归还图书");
+        System.out.println("0. 退出");
+        System.out.println("==============");
+        System.out.println("请输入您的选择：");
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+//        close 本质上是在关闭 System.in
+//        由于后面还需要用到 System.in,所以此处不能关闭
+        return choice;
+    }
+}
+
+//operation包中
+
+//(1)IOperation接口
+
+
+import package_bookmanager.book.BookList;
+
+        public interface IOperation {
+            void work(BookList bookList);
+        }
+
+
+//（2）AddOperation
+
+
+import package_bookmanager.book.Book;
+import package_bookmanager.book.BookList;
+
+import java.util.Scanner;
+
+        public class AddOperation implements IOperation {
+            @Override
+            public void work(BookList bookList) {
+                System.out.println("新增一本书籍");
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("请输入书名：");
+                String name = scanner.next();
+                System.out.println("请输入序号：");
+                String id = scanner.next();
+                System.out.println("请输入作者：");
+                String author = scanner.next();
+                System.out.println("请输入价格：");
+                int price = scanner.nextInt();
+                System.out.println("请输入类别：");
+                String type = scanner.next();
+                Book book = new Book(name,id,author,
+                        price,type,false);
+                bookList.setBook(bookList.getSize(),book);
+                bookList.setSize(bookList.getSize() + 1);
+            }
+        }
+
+//(3)FindOperation
+
+
+import package5.B;
+import package_bookmanager.book.Book;
+import package_bookmanager.book.BookList;
+
+import java.util.Scanner;
+
+        public class    FindOperation implements IOperation {
+            @Override
+            public void work(BookList bookList) {
+                System.out.println("查找书籍");
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("请输入要查找的书名");
+                String name = scanner.next();
+                int count = 0;
+                for (int i = 0; i < bookList.getSize(); i++) {
+                    Book book = bookList.getBook(i);
+                    if (book.getName().equals(name)) {
+//                打印这本书的信息
+                        System.out.println(book);
+                        count++;
+                    }
+                }
+                if (count == 0) {
+                    System.out.println("没找到此书");
+                } else {
+                    System.out.println("共计找到 " + count + " 本书");
+                }
+            }
+        }
+
+//(4)PrintOperation
+
+
+import package_bookmanager.book.BookList;
+
+        public class PrintOperation implements IOperation {
+            @Override
+            public void work(BookList bookList) {
+                System.out.println("打印所有书籍信息");
+                for (int i = 0; i < bookList.getSize(); i++) {
+                    System.out.println(bookList.getBook(i));
+                }
+                System.out.println("共计 " + bookList.getSize() + " 本书");
+            }
+        }
+
+//(5)DelOperation
+
+
+import package5.B;
+import package_bookmanager.book.Book;
+import package_bookmanager.book.BookList;
+
+import java.util.Scanner;
+
+        public class DelOperation implements IOperation {
+            @Override
+            public void work(BookList bookList) {
+                System.out.println("删除书籍");
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("请输入要删除的序号：");
+                String id = scanner.next();
+//        先查找
+                int i = 0;
+                for (; i < bookList.getSize(); i++) {
+                    Book book = bookList.getBook(i);
+                    if (book.getId().equals(id)) {
+//                找到了
+                        break;
+                    }
+                }
+                if (i >= bookList.getSize()) {
+//            没找到
+                    System.out.println("未找到要删除书籍!");
+                    return;
+                }
+//        处理找到了的情况
+//        直接用最后一个元素覆盖当前要删除的元素
+//        再进行尾删
+                Book lastBook = bookList.getBook(bookList.getSize() - 1);
+                bookList.setBook(i,lastBook);
+                bookList.setSize(bookList.getSize() - 1);
+                System.out.println("删除成功!");
+            }
+        }
+
+
+//(6)ExitOperation
+
+
+import package_bookmanager.book.BookList;
+
+        public class ExitOperation implements IOperation {
+            @Override
+            public void work(BookList bookList) {
+                System.out.println("goodbye!");
+//        类似于C语言中的 main 函数 return 0
+//        0 叫做"进程退出码"
+                System.exit(0);
+            }
+        }
+
+//(7)BorrowOperation
+
+
+import package5.B;
+import package_bookmanager.book.Book;
+import package_bookmanager.book.BookList;
+
+import java.util.Scanner;
+
+        public class BorrowOperation implements IOperation {
+            @Override
+            public void work(BookList bookList) {
+                System.out.println("借阅书籍");
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("请输入要借阅的书的编号：");
+                String id = scanner.next();
+                for (int i = 0; i < bookList.getSize(); i++) {
+                    Book book = bookList.getBook(i);
+                    if (!book.getId().equals(id)) {
+                        continue;
+                    }
+//            执行具体的借书操作
+                    if (book.isBorrowed()) {
+                        System.out.println("这本书已经被借走了！");
+                        break;
+                    }
+                    book.setBorrowed(true);
+                }
+            }
+        }
+
+//(8)ReturnOperation
+
+
+import package_bookmanager.book.Book;
+import package_bookmanager.book.BookList;
+
+import java.util.Scanner;
+
+        public class ReturnOperation implements IOperation {
+            @Override
+            public void work(BookList bookList) {
+                System.out.println("归还书籍");
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("请输入要归还的书的编号：");
+                String id = scanner.next();
+                for (int i = 0; i < bookList.getSize(); i++) {
+                    Book book = bookList.getBook(i);
+                    if (!book.getId().equals(id)) {
+                        continue;
+                    }
+//            执行具体的还书操作
+                    if (!book.isBorrowed()) {
+                        System.out.println("这本书已经被归还！");
+                        break;
+                    }
+                    book.setBorrowed(false);
+                }
+
+            }
+        }
+
+}
