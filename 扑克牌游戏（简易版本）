@@ -1,0 +1,78 @@
+package Entity;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+class Card {
+    public String suit;//花色
+    public String rank;//点数
+
+    @Override
+    public String toString() {
+        return "(" + suit + " " + rank + ")";
+    }
+
+    public Card(String suit, String rank) {
+        this.suit = suit;
+        this.rank = rank;
+    }
+}
+
+
+
+public class CardDemo {
+    public static final String[] SUITS = {"♥", "♠", "♣", "♦"};
+    public static List<Card> buyPoker() {
+        List<Card> poker = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            //负责构建四种花色
+            for (int j = 2; j <= 10; j++) {
+                poker.add(new Card(SUITS[i],j + ""));
+            }
+            poker.add(new Card(SUITS[i],"j"));
+            poker.add(new Card(SUITS[i],"Q"));
+            poker.add(new Card(SUITS[i],"k"));
+            poker.add(new Card(SUITS[i],"A"));
+        }
+        return poker;
+    }
+    public static void main(String[] args) {
+        //1. 创建一副牌
+        System.out.println("创建一副牌");
+        List<Card> poker = buyPoker();
+
+        //2. 洗牌
+        Collections.shuffle(poker);
+        System.out.println(poker);
+
+        //3. 发牌(假设三个人，每个人发五张牌)
+        List<List<Card>> players = new ArrayList<>();
+        // 这三个新增的列表表示三个玩家的三幅手牌
+        players.add(new ArrayList<>());
+        players.add(new ArrayList<>());
+        players.add(new ArrayList<>());
+        // 把牌依次发给三个玩家
+        for (int cardIndex = 0; cardIndex < 5; cardIndex++) {
+            for (int playerIndex = 0; playerIndex < 3; playerIndex++) {
+                //把买好的牌发给 0 号玩家
+                //第一种方法
+//                players.get(playerIndex).add(poker.remove(0));
+
+                //第二种方法
+                List<Card> playerCards = players.get(playerIndex);
+                Card curCard = poker.remove(0);
+                // 虽然 get 一般表示读取数据, 但是也可以借助 get 进行修改数据
+                playerCards.add(curCard);
+            }
+        }
+        //4. 输出玩家手牌
+        System.out.println("玩家1：");
+        System.out.println(players.get(0));
+        System.out.println("玩家2：");
+        System.out.println(players.get(1));
+        System.out.println("玩家3：");
+        System.out.println(players.get(2));
+    }
+}
