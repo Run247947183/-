@@ -1,0 +1,46 @@
+package package9;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class TestMap {
+    public static void main(String[] args) {
+        // Map 的基本用法
+        //<>里面存的是键值对
+        Map<String, String> map = new HashMap<>();
+
+        // 使用 isEmpty 和 size
+        System.out.println(map.isEmpty());
+        System.out.println(map.size());
+
+        // 使用 put
+
+        map.put("及时雨", "宋江");
+        map.put("花和尚", "鲁智深");
+        map.put("行者", "武二郎");
+        map.put("行者", "武松");
+        map.put("小李广", "花花");
+
+        System.out.println(map.isEmpty());
+        System.out.println(map.size());
+
+        //使用 get 根据 key 查找 value
+        System.out.println(map.get("鲁智深"));
+
+        //使用 getOrDefault
+        //如果根据 key 没有找到对应的值,那么就返回默认值
+        System.out.println(map.getOrDefault("小李广","花荣"));
+
+        System.out.println(map.get("行者"));
+
+        //需要使用 Entry 来进行遍历, 每个 Entry 就是一个 "条目"
+
+        for (HashMap.Entry<String, String> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+
+        //使用 containsKey 和 containsValue 方法
+        System.out.println(map.containsKey("及时雨"));
+        System.out.println(map.containsValue("武松"));
+    }
+}
