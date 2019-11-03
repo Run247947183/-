@@ -1,0 +1,230 @@
+/*
+
+//在 Entity 包中的 CardDemo
+
+package Entity;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+
+public class CardDemo {
+    private String suit;//花色
+    private String rank;//点数
+    private List<CardDemo> cardDemos = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "(" + suit + " " + rank + ")";
+    }
+
+    public String getRank() {
+        return rank;
+    }
+
+    public String getSuit() {
+
+        return suit;
+    }
+
+    public CardDemo() {
+
+    }
+    public CardDemo(String suit, String rank) {
+        this.suit = suit;
+        this.rank = rank;
+    }
+    private String[] SUITS = {"♠", "♥", "♦", "♣"};
+    private String[] Ranks = {
+            "2", "A", "K", "Q", "J", "10", "9",
+            "8", "7", "6", "5", "4", "3"
+    };
+    private   List<CardDemo> buyPoker() {
+        List<CardDemo> poker = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            //负责构建四种花色
+            for (int j = 2; j <= 10; j++) {
+                poker.add(new CardDemo(SUITS[i],j + ""));
+            }
+            poker.add(new CardDemo(SUITS[i],"j"));
+            poker.add(new CardDemo(SUITS[i],"Q"));
+            poker.add(new CardDemo(SUITS[i],"k"));
+            poker.add(new CardDemo(SUITS[i],"A"));
+        }
+        return poker;
+    }
+    public List<CardDemo> creatPoker() {
+        //1. 创建一副牌
+        System.out.println("创建一副牌！");
+        List<CardDemo> poker = buyPoker();
+
+        //2. 洗牌
+        Collections.shuffle(poker);
+        System.out.println(poker);
+        System.out.println("创建一副牌成功并已洗牌！");
+
+        return poker;
+    }
+    public int compareSuit(CardDemo card) {
+        boolean boolean1 = true;
+        if (this.getSuit().equals(card.getSuit())) {
+            return 0;
+        }
+        for (int i = 0; i < SUITS.length; i++) {
+            if (this.getSuit().equals(SUITS[i])) {
+                boolean1 = true;
+                break;
+            }
+            if (card.getSuit().equals(SUITS[i])) {
+                boolean1 = false;
+                break;
+            }
+        }
+        if (boolean1) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+    public int compareRank(CardDemo card) {
+        boolean boolean1 = true;
+        if (this.getRank().equals(card.getRank())) {
+            return 0;
+        }
+        for (int i = 0; i < Ranks.length; i++) {
+            if (this.getRank().equals(Ranks[i])) {
+                boolean1 = true;
+                break;
+            }
+            if (card.getRank().equals(Ranks[i])) {
+                boolean1 = false;
+                break;
+            }
+        }
+        if (boolean1) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+}
+
+
+package Entity;
+
+public class Judgement {
+    public void whoWin(Players players1, Players players2) {
+        if (players1.maxCard().compareRank(players2.maxCard()) == 0) {
+            if (players1.maxCard().compareSuit(players2.maxCard()) == 0) {
+                System.out.println("平局！");
+                return;
+            } else if (players1.maxCard().compareSuit(players2.maxCard()) == 1) {
+                System.out.println("玩家： " + players1.getName() + " 获胜！");
+                return;
+            } else {
+                System.out.println("玩家： " + players2.getName() + "获胜！");
+                return;
+            }
+        } else if (players1.maxCard().compareRank(players2.maxCard()) == 1) {
+            System.out.println("玩家： " + players1.getName() + " 获胜！");
+            return;
+        } else {
+            System.out.println("玩家：" + players2.getName() + "获胜！");
+        }
+    }
+}
+
+
+package Entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Players {
+    private String name;
+    private List<CardDemo> cardDemos = new ArrayList<>();
+
+    public String getName() {
+        return name;
+    }
+
+    public Players(String name) {
+        this.name = name;
+    }
+
+    public List<CardDemo> getCardDemos() {
+        return cardDemos;
+    }
+
+    public void getCardDemos(CardDemo cardDemos) {
+        this.cardDemos.add(cardDemos);
+    }
+    public CardDemo maxCard() {
+        CardDemo cardDemo = this.cardDemos.get(0);
+        if (this.cardDemos.get(0).compareRank(this.cardDemos.get(1)) == 1) {
+                cardDemo = this.cardDemos.get(0);
+        } else if (this.cardDemos.get(0).compareRank(this.cardDemos.get(1)) == -1) {
+                cardDemo = this.cardDemos.get(1);
+        }
+        return cardDemo;
+    }
+}
+
+package Mange;
+
+
+import Entity.CardDemo;
+import Entity.Judgement;
+import Entity.Players;
+
+import java.util.List;
+import java.util.Scanner;
+
+
+public class Mange {
+    public void startGame() {
+        Scanner scanner = new Scanner(System.in);
+        List<CardDemo> poker = new CardDemo().creatPoker();
+        Judgement judgement = new Judgement();
+        System.out.println("-------游戏准备..-------");
+        System.out.println("请第一位玩家输入姓名：");
+        String name1 = scanner.nextLine();
+        System.out.println("请第二位玩家输入姓名：");
+        String name2 = scanner.nextLine();
+        Players player1 = new Players(name1);
+        Players player2 = new Players(name2);
+        System.out.println("欢迎进入游戏，祝您玩的开心！");
+        System.out.println("-------开始游戏..-------");
+        System.out.println("开始给每个玩家发牌！");
+        for (int i = 0; i < 4; i += 2) {
+            System.out.println("玩家： " + player1.getName() + " 拿牌");
+            player1.getCardDemos(poker.get(i));
+            System.out.println("玩家：" + player2.getName() + "  拿牌");
+            player2.getCardDemos(poker.get(i + 1));
+        }
+        System.out.println("发牌结束！");
+        System.out.println("玩家：" + player1.getName() + "最大手牌为：" + player1.maxCard());
+        System.out.println("玩家：" + player2.getName() + "最大手牌为：" + player2.maxCard());
+        judgement.whoWin(player1, player2);
+        System.out.println("玩家各自的手牌为：");
+        System.out.println(player1.getName() + ":" + player1.getCardDemos());
+        System.out.println(player2.getName() + ":" + player2.getCardDemos());
+    }
+}
+
+
+
+*/
+
+package TestCardGame;
+
+import Mange.Mange;
+
+public class Main {
+    public static void main(String[] args) {
+        Mange mange = new Mange();
+        mange.startGame();
+    }
+}
