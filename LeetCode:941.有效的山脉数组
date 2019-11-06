@@ -1,0 +1,31 @@
+class Solution {
+    public boolean validMountainArray(int[] A) {
+        int len = A.length;
+        if (len < 3) {
+            return false;
+        }
+        int i = 0;
+        boolean a = false;
+        boolean b = false;
+        while (i < len - 1) {
+            if (A[i + 1] > A[i]) {
+                i++;
+                a = true;
+            } else {
+                break;
+            }
+        }
+        while (i < len - 1) {
+            if (A[i + 1] < A[i]) {
+                i++;
+                b = true;
+            } else {
+                break;
+            }
+        }
+        if (a && b && (i == len - 1)) {
+            return true;
+        }
+        return false;
+    }
+}
