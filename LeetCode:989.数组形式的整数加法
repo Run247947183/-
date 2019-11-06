@@ -1,0 +1,17 @@
+class Solution {
+    public List<Integer> addToArrayForm(int[] A, int K) {
+        int len = A.length;
+        int tmp = K;
+        LinkedList<Integer> list = new LinkedList<>();
+        int i = len - 1;
+        while (i >= 0 || tmp > 0) {
+            if (i >= 0) {
+                tmp += A[i];
+            }
+            list.addFirst(tmp % 10);
+            tmp /= 10;
+            i--;
+        }
+        return list;
+    }
+}
