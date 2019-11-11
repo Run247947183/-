@@ -1,0 +1,77 @@
+package package1109;
+
+public class MyPriorityQueue {
+    // 这个数组就是队列的本体，基于这个数组建立堆
+    private int[] array = new int[100];
+    // 堆中元素的个数，堆的大小
+    private int size = 0;
+
+    // 入队列
+    public void offer(int x) {
+        if (size > array.length) {
+            // 此时数组不够大了
+            return;
+        }
+        array[size] = x;
+        size++;
+        shiftUp(array, size - 1);
+    }
+
+    private void shiftUp(int[] array, int index) {
+        int child = index;
+        int parent = (child - 1) / 2;
+        while (child > 0) {
+            if (array[child] > array[parent]) {
+                // 交换两个元素
+                swap(array, child, parent);
+            } else {
+                // 调整完成
+                break;
+            }
+            child = parent;
+            parent = (child - 1) / 2;
+        }
+    }
+
+    private void shiftDown(int[] array, int size, int index) {
+        int parent = index;
+        int child = parent * 2 + 1;
+        while (child < size) {
+            if (child + 1 < size
+                    && array[child + 1] > array[child]) {
+                child = child + 1;
+            }
+            if (array[child] > array[parent]) {
+                swap(array, child, parent);
+            }
+            parent = child;
+            child = parent * 2 + 1;
+        }
+    }
+
+    private void swap(int[] array, int x, int y) {
+        int tmp = array[x];
+        array[x] = array[y];
+        array[y] = tmp;
+    }
+
+    // 出队列
+    public Integer poll() {
+        if (size == 0) {
+            return null;
+        }
+        int ret = array[0];
+        array[0] = array[size - 1];
+        size--;
+        shiftDown(array, size, 0);
+        return ret;
+    }
+
+    // 查看堆顶元素
+    public Integer peek() {
+        if (size == 0) {
+            return null;
+        }
+        return array[0];
+    }
+}
