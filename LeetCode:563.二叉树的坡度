@@ -1,0 +1,29 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    // result 用来记录最终的坡度结果
+    int result = 0;
+    public int findTilt(TreeNode root) {
+        sum(root);
+        return result;
+    }
+    public int sum(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        // 递归计算出左子树的坡度
+        int left = sum(root.left);
+        // 递归计算出右子树的坡度
+        int right = sum(root.right);
+        // 记录每个节点左右子树的坡度
+        result += Math.abs(left - right);
+        return root.val + left + right;
+    }
+}
