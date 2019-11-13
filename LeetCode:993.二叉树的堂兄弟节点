@@ -1,0 +1,40 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    int xParent;// 用来记录和 x 值相同的父节点的值
+    int yParent;// 用来记录和 y 值相同的父节点的值
+    int xDepth; // 用来记录找到和 x 值相同的节点时的深度
+    int yDepth; // 用来记录找到和 y 值相同的节点时的深度
+    public boolean isCousins(TreeNode root, int x, int y) {
+        find(root.left, 1, x, y, root.val);
+        find(root.right, 1, x, y, root.val);
+        return (xParent != yParent) && (xDepth == yDepth);
+    }
+    public void find(TreeNode node, int depth, int x, int y, int parent) {
+        if (node == null) {
+            return;
+        }
+        if (node.val == x) {
+            // 记录下此时节点的父节点
+            xParent = parent;
+            // 记录下此时节点的深度
+            xDepth = depth;
+        } else if (node.val == y) {
+            // 记录下此时节点的父节点
+            yParent = parent;
+            // 记录下此时节点的深度
+            yDepth = depth;
+        } else {
+            // 递归接着寻找与 x 和 y 值相同的节点的父节点和深度
+            find(node.left, depth + 1, x, y, node.val);
+            find(node.right, depth + 1, x, y, node.val);
+        }
+    }
+}
