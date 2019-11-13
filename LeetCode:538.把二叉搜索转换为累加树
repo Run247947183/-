@@ -1,0 +1,28 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    // 先定义一个 num 为 0
+    // 因为先从右子树开始递归，又因为是二叉搜索树
+    // 所以右子树的 root 为最大值，所以加 0 就可以了
+    int num = 0;
+    public TreeNode convertBST(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        // 以右->根->左的顺序变量二叉搜索树
+        convertBST(root.right);
+        root.val = root.val + num;
+        // 每次累加前一个的节点的值
+        // 将累加后的值赋值给 num ，用于下次累加
+        num = root.val;
+        convertBST(root.left);
+        return root;
+    }
+}
