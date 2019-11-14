@@ -1,0 +1,36 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode increasingBST(TreeNode root) {
+        // 借助链表来帮助我们创建新的树
+        LinkedList<Integer> list = new LinkedList<>();
+        // add 函数进行中层遍历
+        // 将原来树中的节点加入到链表中
+        add(root, list);
+        TreeNode ret = new TreeNode(list.get(0));
+        // 创建一个辅助节点 node 来进行新树的建立
+        TreeNode node = ret;
+        for (int i = 1; i < list.size(); i++) {
+            // 如果这里 node 改成 ret 
+            // 那么就只会返回一个最后节点
+            node.right = new TreeNode(list.get(i));
+            node = node.right;
+        }
+        return ret;
+    }
+    public void add(TreeNode root, LinkedList<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        add(root.left, list);
+        list.add(root.val);
+        add(root.right, list);
+    }
+}
