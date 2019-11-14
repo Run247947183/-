@@ -1,0 +1,29 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        // 利用字符串进行最后两棵树的叶子比较
+        String str1 = findLeaf(root1, "");
+        String str2 = findLeaf(root2, "");
+        return str1.equals(str2);
+    }
+    public String findLeaf(TreeNode root, String str) {
+        // 采用先序遍历
+        if (root == null) {
+            return str;
+        }
+        // 如果是叶子节点，那么将它的值加入到对应树的字符串中
+        if (root.left == null && root.right == null) {
+            str = str + root.val;
+            return str;
+        }
+        return findLeaf(root.left, str) + findLeaf(root.right, str);
+    }
+}
