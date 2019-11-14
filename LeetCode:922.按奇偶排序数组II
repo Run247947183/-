@@ -1,0 +1,24 @@
+class Solution {
+    public int[] sortArrayByParityII(int[] A) {
+        // j 下标的数组元素就代表奇数下标的元素
+        int j = 1;
+        // i 下标的数组元素就代表偶数下标的元素
+        for (int i = 0; i < A.length; i += 2) {
+            // 如果偶数下标的元素值不为偶数
+            // 则进行循环找到奇数下标的元素值不为奇数的元素
+            // 并与这个元素交换位置
+            if ((A[i] % 2) != 0) {
+                while ((A[j] % 2) != 0) {
+                    j += 2;
+                }
+                swap(A, i, j);
+            }
+        }
+        return A;
+    }
+    public void swap(int[] A, int x, int y) {
+        int tmp = A[x];
+        A[x] = A[y];
+        A[y] = tmp;
+    }
+}
