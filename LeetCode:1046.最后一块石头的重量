@@ -1,0 +1,27 @@
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        // 注意：java 中默认的 PriorityQueue 是小堆的建立
+        // 我们需要将它改成建立大堆
+        PriorityQueue<Integer> pq = new PriorityQueue<>((i1, i2) -> i2 - i1);
+        // foreach 添加数组中的元素
+        // for (int i : stones) {
+        //     pq.offer(i);
+        // }
+        // for 循环添加数组元素
+        for (int i = 0; i < stones.length; i++) {
+            pq.offer(stones[i]);
+        }
+        // 当堆中的元素超过或者等于 2 个时接着取出石头碰撞
+        // 将碰撞后剩余重量的石头重新加入堆中
+        while (pq.size() >= 2) {
+            int x = pq.poll();
+            int y = pq.poll();
+            if (x > y) {
+                pq.offer(x - y);
+            }
+        }
+        // 最后如果堆中存在一个石头，那么就返回它的重量
+        // 否则就返回 0 
+        return pq.size() == 1 ? pq.peek() : 0;
+    }
+}
