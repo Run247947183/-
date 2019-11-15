@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        return helper(nums, 0, nums.length - 1);
+    }
+    public TreeNode helper(int[] nums, int start, int end) {
+        if (nums.length == 0) {
+            return null;
+        }
+        if (start > end) {
+            return null;
+        }
+        // 1. 找出 start 到 end 区间最大值元素下标
+        int bound = findMax(nums, start, end);
+        // 2. 创建这个下标节点
+        TreeNode root = new TreeNode(nums[bound]);
+        // 3. 紧接着递归创建这个节点的左子树和右子树
+        root.left = helper(nums, start, bound - 1);
+        root.right = helper(nums, bound + 1, end);
+        return root;
+    }
+    public int findMax(int[] nums,int start, int end) {
+        int tmp = start; 
+        for (int i = start; i <= end; i++) {
+            if (nums[i] > nums[tmp]) {
+                tmp = i;
+            }
+        }
+        return tmp;
+    }
+}
