@@ -31,7 +31,7 @@ public class BinaryTreeDemo2 {
             // 访问是一组比较复杂的判断
             if (!A) {
                 // 第一阶段的情况
-                if (cur.left == null && cur.right == null) {
+                if (cur.left != null && cur.right != null) {
                     // 合格的状态, 继续往下遍历.
                     // 就把左右子树加入队列就行了
                     queue.offer(cur.left);
